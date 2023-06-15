@@ -14,23 +14,6 @@ public class Ingrediente extends Alimento implements Cloneable {
 
     public Ingrediente(String nome, double prot, double fat, double carb, double cal, double porcao) {
         super(nome, prot, fat, carb, cal, porcao);
-        this.porcao = porcao;
-    }
-
-    // Getters e setters
-
-    public double getPorcao() {
-        return porcao;
-    }
-
-    public void setPorcao(double porcao) {
-        this.porcao = porcao;
-    }
-
-
-    @Override
-    public String toString() {
-        return "\n" + nome + "," + porcao + "," + prot + "," + fat + "," + carb + "," + cal;
     }
 
     @Override
@@ -39,9 +22,17 @@ public class Ingrediente extends Alimento implements Cloneable {
     }
 
     // Métodos 
+
+    @Override
+    public boolean calcularMacros() {
+        Macros novo = Macros.macrosPorPorcao(this.getMacros(), super.getPorcao());
+        super.setMacros(novo);
+        return true;
+    }
+
     
     public Macros CalcularMacrosPorcao() {
-        Macros novo = Macros.macrosPorPorcao(this.getMacros(), porcao);
+        Macros novo = Macros.macrosPorPorcao(this.getMacros(), super.getPorcao());
         return novo;
     }   
 }

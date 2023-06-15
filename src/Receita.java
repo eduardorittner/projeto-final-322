@@ -4,7 +4,6 @@ import java.util.*;
 public class Receita extends Alimento {
 
     private ArrayList<Ingrediente> listaIngredientes;
-    private double porcao;
 
     // Constructor
     ArrayList<Ingrediente> aux = new ArrayList<Ingrediente>();
@@ -14,7 +13,6 @@ public class Receita extends Alimento {
 
     public Receita(String nome, double prot, double fat, double carb, double cal, double porcao) {
         super(nome, prot, fat, carb, cal, porcao);
-        this.porcao = porcao;
         this.listaIngredientes = aux;
     }
 
@@ -28,17 +26,9 @@ public class Receita extends Alimento {
         this.listaIngredientes = listaIngredientes;
     }
 
-    public double getPorcao() {
-        return porcao;
-    }
-
-    public void setPorcao(double porcao) {
-        this.porcao = porcao;
-    }
-
     @Override
     public String toString() {
-        return super.getNome() + " (porção de " + porcao + " g)\n" + super.getMacros();
+        return super.toString() + listaAlimentos();
     }
 
     // Métodos 
@@ -61,7 +51,7 @@ public class Receita extends Alimento {
             novo = Macros.somaMacros(aux, novo);
         }
         this.setMacros(novo);       // Atualiza os macros e o peso da receita
-        this.porcao = peso;
+        super.setPorcao(peso);
         return true;
     }
 
@@ -87,6 +77,16 @@ public class Receita extends Alimento {
             System.out.println(i + ") " + en.getNome() + "(" + en.getPorcao() + "g)");
             i++;
         }
+    }
+
+    public String listaAlimentos() {
+        String string = "";
+        int i = 1;
+        for (Ingrediente en:listaIngredientes) {
+            string += i + ") " + en.getNome() + " (" + en.getPorcao() + "g)\n";
+            i++;
+        }
+        return string;
     }
 
 }

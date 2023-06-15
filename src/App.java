@@ -28,11 +28,12 @@ public class App {
                 //System.out.println(banana);
                 //System.out.println(frango);
                 Receita receita1 = Receita.novaReceita("Receita 1");
-                //Receita receita2 = Receita.novaReceita("Receita 2");
+                Receita receita2 = Receita.novaReceita("Receita 2");
                 receita1.adicionarIngrediente(frango, 200);
                 receita1.adicionarIngrediente(banana, 100);
-                receita1.adicionarIngrediente(maca, 100);
-                receita1.imprimirAlimentos();
+                receita2.adicionarIngrediente(frango, 200);
+                receita2.adicionarIngrediente(banana, 100);
+                receita2.adicionarIngrediente(maca, 200);
                 System.out.println(receita1);
                 ArrayList<Ingrediente> lista = new ArrayList<>();
                 lista.add(banana);
@@ -47,6 +48,11 @@ public class App {
                 } catch (Exception e) {
                         System.out.println(e);
                 }
+                Refeicao almoco = Refeicao.novaRefeicao("Almoço");
+                almoco.adicionarAlimento(maca, 200);
+                almoco.adicionarAlimento(receita1, 1);
+                System.out.println(almoco);
+                System.out.println(receita2);
 
 
         }
