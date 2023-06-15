@@ -2,12 +2,9 @@ import java.util.*;
 
 public abstract class Alimento {
 
-    public final int id; // id final para que possamos referenciar o alimento em uma lista
-    public String nome;
-    public double prot;
-    public double fat;
-    public double carb;
-    public double cal;
+    private final int id;        // id final para que possamos referenciar o alimento em uma lista
+    private String nome;
+    private Macros macros;
 
     private static ArrayList<Integer> listaIds = new ArrayList<Integer>();
     Random rand = new Random();
@@ -21,20 +18,21 @@ public abstract class Alimento {
 
     // Constructor
 
-    public Alimento(String nome, double prot, double fat, double carb, double cal, double peso) {
+    public Alimento(String nome, double prot, double fat, double carb, double cal, double porcao) {
         this.nome = nome;
-        if (peso != 1.0) {
-            prot = prot / peso;
-            fat = fat / peso;
-            carb = carb / peso;
-            cal = cal / peso;
+        if (porcao == 0) {  // Evita divisão por zero
+            System.out.println("Porção de 0g inválida.\nCorrigido para 1g");
+            porcao = 1;
         }
+        prot = prot/porcao;     // Normaliza as grandezas registradas para 1g do alimento
+        fat = fat/porcao;
+        carb = carb/porcao;
+        cal = cal/porcao;
+        
         this.nome = nome; // TODO validação do nome (somente letras)
-        this.fat = fat;
-        this.prot = prot;
-        this.carb = carb;
-        this.cal = cal;
-        int temp = rand.nextInt(1000000); // Gerador de id único por alimento
+        this.macros = new Macros(prot, fat, carb, cal);
+
+        int temp = rand.nextInt(1000000);   // Gerador de id único por alimento
         while (listaIds.contains(temp)) {
             temp = rand.nextInt(1000000);
         }
@@ -55,45 +53,23 @@ public abstract class Alimento {
         this.nome = nome;
     }
 
-    public double getProt() {
-        return prot;
+    public Macros getMacros() {
+        return macros;
     }
 
-    public void setProt(double prot) {
-        this.prot = prot;
-    }
-
-    public double getFat() {
-        return fat;
-    }
-
-    public void setFat(double fat) {
-        this.fat = fat;
-    }
-
-    public double getCarb() {
-        return carb;
-    }
-
-    public void setCarb(double carb) {
-        this.carb = carb;
-    }
-
-    public double getCal() {
-        return cal;
-    }
-
-    public void setCal(double cal) {
-        this.cal = cal;
+    public void setMacros(Macros macros) {
+        this.macros = macros;
     }
 
     @Override
     public String toString() {
-        // Nesse formato pra exportar pra csv válido diretamente
-        return "\n" + nome + "," + id + "," + prot + "," + fat + "," + carb + "," + cal;
+        return nome + "\n" + macros;
     }
 
-    void calcularMacros() {
-    };
+    // Métodos 
 
-}
+    public boolean calcularMacros() {
+        return true;
+    }
+
+}   
