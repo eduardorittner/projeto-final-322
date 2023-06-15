@@ -9,8 +9,9 @@ import java.util.ArrayList;
 // Encontrar um jeito de fechar o escritor e leitor quando o objeto for destruído
 // Provavelmente com algum tipo de interface
 
-public class ExpoImpoCsv extends ExpoImpo {
+public class ExpoImpoCsv implements ExpoImpo {
 
+    private File arquivo;
     private FileWriter escritor;
     private BufferedReader leitor;
 
@@ -18,8 +19,8 @@ public class ExpoImpoCsv extends ExpoImpo {
         // Precisa do try catch pq ele pode não achar o arquivo
         try {
             this.arquivo = new File(arquivoSaida + ".csv");
-            escritor = new FileWriter(super.getArquivo());
-            leitor = new BufferedReader(new FileReader(super.getArquivo()));
+            escritor = new FileWriter(arquivo);
+            leitor = new BufferedReader(new FileReader(arquivo));
         } catch (Exception e) {
             throw e;
         }
@@ -28,8 +29,8 @@ public class ExpoImpoCsv extends ExpoImpo {
     public boolean setArquivo(String novoArquivo) {
         try {
             File novo = new File(novoArquivo + ".csv");
-            FileWriter novoEscritor = new FileWriter(super.getArquivo());
-            BufferedReader novoLeitor = new BufferedReader(new FileReader(super.getArquivo()));
+            FileWriter novoEscritor = new FileWriter(arquivo);
+            BufferedReader novoLeitor = new BufferedReader(new FileReader(arquivo));
             this.arquivo = novo;
             this.escritor = novoEscritor;
             this.leitor = novoLeitor;
@@ -37,6 +38,10 @@ public class ExpoImpoCsv extends ExpoImpo {
             return false;
         }
         return true;
+    }
+
+    public File getArquivo() {
+        return arquivo;
     }
 
     public boolean exportarIngredientes(ArrayList<Ingrediente> listaIngredientes) {
@@ -93,7 +98,7 @@ public class ExpoImpoCsv extends ExpoImpo {
         return true;
     }
 
-    boolean estaAtualizado() {
+    public boolean estaAtualizado() {
         return true;
     }
 

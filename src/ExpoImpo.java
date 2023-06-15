@@ -1,15 +1,11 @@
 import java.io.File;
 import java.util.ArrayList;
 
-public abstract class ExpoImpo {
-
-    protected File arquivo;
+public interface ExpoImpo {
 
     abstract public boolean setArquivo(String novoArquivo);
 
-    public File getArquivo() {
-        return arquivo;
-    }
+    public File getArquivo();
 
     abstract public boolean exportarIngredientes(ArrayList<Ingrediente> listaIngredientes);
 
