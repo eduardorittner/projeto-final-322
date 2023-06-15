@@ -1,11 +1,12 @@
 import java.util.*;
 
 
-public abstract class Alimento {
+public abstract class Alimento implements Cloneable{
 
     private final int id;        // id final para que possamos referenciar o alimento em uma lista
     private String nome;
     private Macros macros;
+    private double porcao;
 
     private static ArrayList<Integer> listaIds = new ArrayList<Integer>();
     Random rand = new Random();
@@ -26,7 +27,7 @@ public abstract class Alimento {
         fat = fat/porcao;
         carb = carb/porcao;
         cal = cal/porcao;
-        
+        this.porcao = porcao;
         this.nome = nome; // TODO validação do nome (somente letras)
         this.macros = new Macros(prot, fat, carb, cal);
 
@@ -59,9 +60,22 @@ public abstract class Alimento {
         this.macros = macros;
     }
 
+    public double getPorcao() {
+        return porcao;
+    }
+
+    public void setPorcao(double porcao) {
+        this.porcao = porcao;
+    }
+
     @Override
     public String toString() {
-        return nome + "\n" + macros;
+        return nome + "- Porção: " + porcao + "g;\n" + macros;
+    }
+
+    @Override
+    public Alimento clone() throws CloneNotSupportedException {
+        return (Alimento) super.clone();
     }
 
     // Métodos 
