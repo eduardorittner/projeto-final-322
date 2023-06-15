@@ -1,9 +1,8 @@
 import java.util.*;
 
-
 public abstract class Alimento {
 
-    public final int id;        // id final para que possamos referenciar o alimento em uma lista
+    public final int id; // id final para que possamos referenciar o alimento em uma lista
     public String nome;
     public double prot;
     public double fat;
@@ -13,26 +12,29 @@ public abstract class Alimento {
     private static ArrayList<Integer> listaIds = new ArrayList<Integer>();
     Random rand = new Random();
 
-    /* O alimento não tem um peso específico pois todos eles serão registrados
-    considerando 1g, assim seus macros sempre estarão relacionados a 1g do alimento.
-    No construtor coloquei a variável peso para o caso de a entrada não ser 1g*/
+    /*
+     * O alimento não tem um peso específico pois todos eles serão registrados
+     * considerando 1g, assim seus macros sempre estarão relacionados a 1g do
+     * alimento.
+     * No construtor coloquei a variável peso para o caso de a entrada não ser 1g
+     */
 
-    // Constructor 
+    // Constructor
 
     public Alimento(String nome, double prot, double fat, double carb, double cal, double peso) {
         this.nome = nome;
         if (peso != 1.0) {
-            prot = prot/peso;
-            fat = fat/peso;
-            carb = carb/peso;
-            cal = cal/peso;
+            prot = prot / peso;
+            fat = fat / peso;
+            carb = carb / peso;
+            cal = cal / peso;
         }
         this.nome = nome; // TODO validação do nome (somente letras)
-        this.fat = fat; 
+        this.fat = fat;
         this.prot = prot;
         this.carb = carb;
         this.cal = cal;
-        int temp = rand.nextInt(1000000);   // Gerador de id único por alimento
+        int temp = rand.nextInt(1000000); // Gerador de id único por alimento
         while (listaIds.contains(temp)) {
             temp = rand.nextInt(1000000);
         }
@@ -40,7 +42,7 @@ public abstract class Alimento {
     }
 
     // Getters e setters
-    
+
     public int getId() {
         return id;
     }
@@ -87,10 +89,11 @@ public abstract class Alimento {
 
     @Override
     public String toString() {
-        return nome + "\nCarbs:" + carb + "; Prot:" + prot + "; Fat:" + fat + "; Cal:" + cal + "\n";
+        // Nesse formato pra exportar pra csv válido diretamente
+        return "\n" + nome + "," + id + "," + prot + "," + fat + "," + carb + "," + cal;
     }
 
-    void calcularMacros() {};
+    void calcularMacros() {
+    };
 
-
-}   
+}

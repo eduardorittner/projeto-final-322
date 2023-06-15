@@ -1,37 +1,27 @@
 import java.io.File;
+import java.util.ArrayList;
 
 public abstract class ExpoImpo {
-    private File arquivoSaida;
 
-    public ExpoImpo(String arquivoSaida) throws Exception {
-        this.arquivoSaida = new File(arquivoSaida);
-        try {
-            this.arquivoSaida.createNewFile();
-        } catch (Exception e) {
-            throw e;
-        }
+    protected File arquivo;
+
+    abstract public boolean setArquivo(String novoArquivo);
+
+    public File getArquivo() {
+        return arquivo;
     }
 
-    public boolean setArquivoSaida(String arquivoSaida) {
-        this.arquivoSaida = new File(arquivoSaida);
-        return true;
-    }
-
-    public File getArquivoSaida() {
-        return arquivoSaida;
-    }
-
-    abstract public boolean exportarIngredientes();
+    abstract public boolean exportarIngredientes(ArrayList<Ingrediente> listaIngredientes);
 
     abstract public boolean exportarReceitas();
 
-    abstract public boolean exportarAlimentos();
+    abstract public boolean exportarAlimentos(ArrayList<Alimento> listaAlimentos);
 
-    abstract public boolean importarIngredientes();
+    abstract public boolean importarIngredientes(ArrayList<Ingrediente> listaIngredientes);
 
     abstract public boolean importarReceitas();
 
-    abstract public boolean importarAlimentos();
+    abstract public boolean importarAlimentos(ArrayList<Alimento> listaAlimentos);
 
     abstract boolean estaAtualizado();
 
