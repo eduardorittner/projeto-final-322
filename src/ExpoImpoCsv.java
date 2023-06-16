@@ -16,7 +16,7 @@ import java.util.ArrayList;
 // pra isso precisamos ter algum lugar pra armazenar todos os ingredientes
 // disponíveis, talvez uma lista estática da classe
 
-public class ExpoImpoCsv implements ExpoImpo {
+public class ExpoImpoCsv implements ExpoImpo, AutoCloseable {
 
     private File arquivo;
     private FileWriter escritor;
@@ -49,6 +49,15 @@ public class ExpoImpoCsv implements ExpoImpo {
 
     public File getArquivo() {
         return arquivo;
+    }
+
+    public void close() {
+        try {
+            escritor.close();
+            leitor.close();
+        } catch (IOException e) {
+            return;
+        }
     }
 
     public boolean exportarIngredientes(ArrayList<Ingrediente> listaIngredientes) {
