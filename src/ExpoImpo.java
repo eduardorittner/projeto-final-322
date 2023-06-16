@@ -9,13 +9,13 @@ public interface ExpoImpo {
 
     abstract public boolean exportarIngredientes(ArrayList<Ingrediente> listaIngredientes);
 
-    abstract public boolean exportarReceitas();
+    abstract public boolean exportarReceitas(ArrayList<Receita> listaReceitas);
 
     abstract public boolean exportarAlimentos(ArrayList<Alimento> listaAlimentos);
 
     abstract public boolean importarIngredientes(ArrayList<Ingrediente> listaIngredientes);
 
-    abstract public boolean importarReceitas();
+    abstract public boolean importarReceitas(ArrayList<Receita> listaReceitas);
 
     abstract public boolean importarAlimentos(ArrayList<Alimento> listaAlimentos);
 

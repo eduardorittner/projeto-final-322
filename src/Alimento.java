@@ -1,9 +1,8 @@
 import java.util.*;
 
+public abstract class Alimento implements Cloneable {
 
-public abstract class Alimento implements Cloneable{
-
-    private final int id;        // id final para que possamos referenciar o alimento em uma lista
+    private final int id; // id final para que possamos referenciar o alimento em uma lista
     private String nome;
     private Macros macros;
     private double porcao;
@@ -22,19 +21,19 @@ public abstract class Alimento implements Cloneable{
 
     public Alimento(String nome, double prot, double fat, double carb, double cal, double porcao) {
         this.nome = nome;
-        if (porcao == 0) {  // Evita divisão por zero
+        if (porcao == 0) { // Evita divisão por zero
             System.out.println("Porção de 0g inválida.\nCorrigido para 1g");
             porcao = 1;
         }
-        prot = prot/porcao;     // Normaliza as grandezas registradas para 1g do alimento
-        fat = fat/porcao;
-        carb = carb/porcao;
-        cal = cal/porcao;
+        prot = prot / porcao; // Normaliza as grandezas registradas para 1g do alimento
+        fat = fat / porcao;
+        carb = carb / porcao;
+        cal = cal / porcao;
         this.porcao = porcao;
         this.nome = nome; // TODO validação do nome (somente letras)
         this.macros = new Macros(prot, fat, carb, cal);
 
-        int temp = rand.nextInt(1000000);   // Gerador de id único por alimento
+        int temp = rand.nextInt(1000000); // Gerador de id único por alimento
         while (listaIds.contains(temp)) {
             temp = rand.nextInt(1000000);
         }
@@ -73,7 +72,9 @@ public abstract class Alimento implements Cloneable{
 
     @Override
     public String toString() {
-        return nome + "- Porção: " + porcao + "g;\n" + macros;
+        // NAO MUDAR
+        return nome + "," + macros.getProt() + "," + macros.getFat() + "," + macros.getCarb() + ","
+                + macros.getCal() + "," + porcao;
     }
 
     @Override
@@ -81,10 +82,10 @@ public abstract class Alimento implements Cloneable{
         return (Alimento) super.clone();
     }
 
-    // Métodos 
+    // Métodos
 
     public boolean calcularMacros() {
         return true;
     }
 
-}   
+}
