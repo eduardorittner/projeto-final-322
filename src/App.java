@@ -19,7 +19,8 @@ public class App {
                 // frame.getContentPane().add(button);
                 // frame.setVisible(true);
 
-                // sou muito inteligente*/
+                TelaLogin telaLogin = new TelaLogin();
+                telaLogin.setVisible(true);
 
                 Ingrediente maca = new Ingrediente("Maçã", 0, 10, 10, 60, 100);
                 Ingrediente banana = new Ingrediente("Banana", 0, 0, 30, 120, 100);
