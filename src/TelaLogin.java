@@ -55,9 +55,8 @@ public class TelaLogin extends JFrame {
         JButton botaoCadastrar = new JButton("Cadastrar");
         botaoCadastrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                abrirCadastro();
-
+                TelaLogin.this.setVisible(false);
+                abrirCadastro(login, TelaLogin.this);
             }
         });
         JPanel cadastro = new JPanel();
@@ -77,8 +76,8 @@ public class TelaLogin extends JFrame {
         TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(true);
     }
-    public void abrirCadastro () {
-        TelaCadastro cadastro = new TelaCadastro();
+    public void abrirCadastro (Login login, TelaLogin telaLogin) {
+        TelaCadastro cadastro = new TelaCadastro(login, telaLogin);
         cadastro.setVisible(true);
     }
 }

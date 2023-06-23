@@ -7,8 +7,10 @@ public class TelaCadastro extends JFrame {
     private JTextField campoLogin;
     private JPasswordField campoSenha;
     private JPasswordField campoSenhaConfirm;
+    private Login login;
 
-    public TelaCadastro(){
+    public TelaCadastro(Login login, TelaLogin telaLogin){
+        this.login = login;
         setTitle("Tela de Cadastro");
         setSize(390, 844);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -41,12 +43,17 @@ public class TelaCadastro extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String usuario = campoLogin.getText();
                 String senha = new String(campoSenha.getPassword());
-                if (usuario.equals("admin") && senha.equals("admin")) {
-                    JOptionPane.showMessageDialog(TelaCadastro.this, "Login bem-sucedido!");
+                String senha2 = new String(campoSenhaConfirm.getPassword());
+                if ( senha.equals(senha2)) {
+                    if (login.cadastrarUsuario(usuario, senha2)){
+                        JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro feito com sucesso!");
+                    } else{
+                        JOptionPane.showMessageDialog(TelaCadastro.this, "Erro ao cadastrar");
+                    }
                     dispose();
-                    abrirPrincipal();
+                    telaLogin.setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(TelaCadastro.this, "Credenciais inválidas!");
+                    JOptionPane.showMessageDialog(TelaCadastro.this, "As senhas devem ser iguais!");
                 }
             }
         });
