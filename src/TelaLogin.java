@@ -15,16 +15,27 @@ public class TelaLogin extends JFrame {
             System.out.println(e);
         }
         setTitle("Tela de Login");
-        setSize(300, 200);
+        setSize(390, 844);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        Dimension inputSize = new Dimension(238,25);
         JPanel painelPrincipal = new JPanel();
         painelPrincipal.setLayout(new BoxLayout(painelPrincipal, BoxLayout.Y_AXIS));
+        painelPrincipal.add(Box.createVerticalGlue());
         JLabel labelUsuario = new JLabel("Usuário:");
-        campoLogin = new JTextField(10);
+        labelUsuario.setAlignmentX(Component.CENTER_ALIGNMENT);
+        campoLogin = new JTextField(20);
+        JPanel log = new JPanel();
+        log.add(campoLogin);
+        log.setSize(inputSize);
         JLabel labelSenha = new JLabel("Senha:");
-        campoSenha = new JPasswordField(10);
+        labelSenha.setAlignmentX(Component.CENTER_ALIGNMENT);
+        campoSenha = new JPasswordField(20);
+        JPanel sen = new JPanel();
+        sen.add(campoSenha);
+        sen.setSize(inputSize);
         JButton botaoLogin = new JButton("Login");
+        botaoLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
         botaoLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String usuario = campoLogin.getText();
@@ -40,11 +51,24 @@ public class TelaLogin extends JFrame {
                 }
             }
         });
+        JLabel labelCadastro = new JLabel("Novo por aqui?"); 
+        JButton botaoCadastrar = new JButton("Cadastrar");
+        botaoCadastrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                TelaLogin.this.setVisible(false);
+                abrirCadastro(login, TelaLogin.this);
+            }
+        });
+        JPanel cadastro = new JPanel();
+        cadastro.add(labelCadastro);
+        cadastro.add(botaoCadastrar);
         painelPrincipal.add(labelUsuario);
-        painelPrincipal.add(campoLogin);
+        painelPrincipal.add(log);
         painelPrincipal.add(labelSenha);
-        painelPrincipal.add(campoSenha);
+        painelPrincipal.add(sen);
         painelPrincipal.add(botaoLogin);
+        painelPrincipal.add(cadastro);
+        painelPrincipal.add(Box.createVerticalGlue());
         add(painelPrincipal);
     }
 
@@ -52,5 +76,8 @@ public class TelaLogin extends JFrame {
         TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(true);
     }
-
+    public void abrirCadastro (Login login, TelaLogin telaLogin) {
+        TelaCadastro cadastro = new TelaCadastro(login, telaLogin);
+        cadastro.setVisible(true);
+    }
 }
