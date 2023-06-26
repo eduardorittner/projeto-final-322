@@ -15,7 +15,6 @@ public abstract class Alimento implements Cloneable {
      * O alimento não tem um peso específico pois todos eles serão registrados
      * considerando 1g, assim seus macros sempre estarão relacionados a 1g do
      * alimento.
-     * No construtor coloquei a variável peso para o caso de a entrada não ser 1g
      */
 
     // Constructor
