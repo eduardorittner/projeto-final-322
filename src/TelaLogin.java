@@ -51,6 +51,7 @@ public class TelaLogin extends JFrame {
                     try {
                         BufferedReader leitor = new BufferedReader(new FileReader(usuario + ".csv"));
                         String linhaw = leitor.readLine();
+                        linhaw = leitor.readLine();
                         String[] linha = linhaw.split(",");
                         if (linha[0].equals(usuario)) {
                             Usuario u = new Usuario(linha[0], linha[1], linha[2], linha[3], linha[4], linha[5], linha[6]);
