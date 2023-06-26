@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 //import javax.swing.*;
 
 public class App {
@@ -6,6 +7,7 @@ public class App {
 
                 TelaLogin telaLogin = new TelaLogin();
                 telaLogin.setVisible(true);
+
 
         }
 }
