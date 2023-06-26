@@ -9,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 public class TelaPrincipal extends JFrame {
     public TelaPrincipal(Usuario u){
-        System.out.println("================================================");
         setTitle("Tela Principal");
         setSize(390, 844);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

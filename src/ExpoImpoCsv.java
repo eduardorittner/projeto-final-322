@@ -61,7 +61,6 @@ public class ExpoImpoCsv implements ExpoImpo, AutoCloseable {
     }
 
     public boolean exportarIngredientes(ArrayList<Ingrediente> listaIngredientes) {
-        // nome, porcao, prot, fat, carb, cal
         String colunas = "Nome,Proteínas,Gorduras,Carboidratos,Calorias,Porção";
         try {
             escritor.write(colunas);
@@ -107,7 +106,7 @@ public class ExpoImpoCsv implements ExpoImpo, AutoCloseable {
 
     public boolean importarIngredientes(ArrayList<Ingrediente> listaIngredientes) {
         // Essa função recebe uma lista de ingredientes por referência e modifica ela
-        // dentro da função, se
+        // dentro da função
 
         String line;
         try {

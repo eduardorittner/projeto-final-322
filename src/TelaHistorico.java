@@ -41,6 +41,8 @@ public class TelaHistorico extends JPanel{
         painelHistorico.setLayout(new FlowLayout(FlowLayout.CENTER,0, 50));
         painelHistorico.setPreferredSize(new Dimension(290, 500));
         painelHistorico.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        //Painel de calorias
+    
 
         // Criação do painel de histórico
         ListaRef listaRefeicoes = new ListaRef();

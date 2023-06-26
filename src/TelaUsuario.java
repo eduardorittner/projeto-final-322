@@ -1,8 +1,10 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.RenderedImage;
 import java.io.File;
 
 public class TelaUsuario extends JPanel {
@@ -26,6 +28,10 @@ public class TelaUsuario extends JPanel {
         fotoLabel = new JLabel();
         fotoLabel.setHorizontalAlignment(SwingConstants.CENTER);
         fotoLabel.setVerticalAlignment(SwingConstants.CENTER);
+        if (!usuario.getCaminhoFoto().equals(".")) {
+            ImageIcon icone = new ImageIcon(usuario.getCaminhoFoto());
+            fotoLabel.setIcon(new ImageIcon(icone.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
+        }
         painelPrincipal.add(fotoLabel, BorderLayout.NORTH);
         
         JPanel painelFormatacao = new JPanel();
@@ -176,7 +182,6 @@ public class TelaUsuario extends JPanel {
                         }
 
                         usuario.salvaUsuarios();
-
                         abas.remove(painelEditar);
                     }
                 });

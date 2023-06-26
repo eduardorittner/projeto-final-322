@@ -40,7 +40,7 @@ public class Usuario implements Serializable {
         try {
         BufferedWriter escritor = new BufferedWriter(new FileWriter(this.bancoUsuario));
         escritor.append("\n");
-        escritor.append(username + "," + nome + "," + idade + "," + altura + "," + peso + "," + genero + "," + email + "," + caminhoFoto + "\n");
+        escritor.append(username + "," + nome + "," + idade + "," + altura + "," + peso + "," + genero + "," + email + "," + caminhoFoto);
         escritor.close();
         } catch (IOException e) {
         }
