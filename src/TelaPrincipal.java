@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,10 +15,21 @@ public class TelaPrincipal extends JFrame {
         setLocationRelativeTo(null);
         // setLayout(new GridLayout(FRAMEBITS, ERROR, ALLBITS, ABORT));
         JPanel painelPrincipal = new JPanel();
+        TelaUsuario telaUsuario = new TelaUsuario();
+        CardLayout cardLayout = new CardLayout();
+        painelPrincipal.add(telaUsuario, "Tela Usuário");
         painelPrincipal.setLayout(new FlowLayout(FlowLayout.CENTER,0, 50));
         // painelPrincipal.add(Box.createVerticalGlue());
         JMenuBar menuBar = new JMenuBar();
         JMenu usuario = new JMenu("Usuário");
+        JMenuItem usuarioItem = new JMenuItem("Tela Usuário");
+        usuario.add(usuarioItem);
+        usuarioItem.addActionListener(new ActionListener () {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(painelPrincipal, "Tela Usuário");
+            }
+        });
         JMenu historico = new JMenu("Histórico");
         menuBar.add(usuario);
         menuBar.add(historico);
