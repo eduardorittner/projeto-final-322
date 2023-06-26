@@ -1,7 +1,9 @@
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.border.*;
 import javax.swing.border.EmptyBorder;
 
 public class TelaPrincipal extends JFrame {
@@ -12,7 +14,7 @@ public class TelaPrincipal extends JFrame {
         setLocationRelativeTo(null);
         // setLayout(new GridLayout(FRAMEBITS, ERROR, ALLBITS, ABORT));
         JPanel painelPrincipal = new JPanel();
-        painelPrincipal.setLayout(new BoxLayout(painelPrincipal, BoxLayout.Y_AXIS));
+        painelPrincipal.setLayout(new FlowLayout(FlowLayout.CENTER,0, 50));
         // painelPrincipal.add(Box.createVerticalGlue());
         JMenuBar menuBar = new JMenuBar();
         JMenu usuario = new JMenu("Usuário");
@@ -23,7 +25,6 @@ public class TelaPrincipal extends JFrame {
         //Passar os macros como o formato de string (MUDAR COM .FORMAT OU .TOSTRING)
         JPanel macros = new JPanel();
         macros.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
-
         //Painel de proteinas
         JPanel proteina = new JPanel();
         proteina.setLayout(new BoxLayout(proteina, BoxLayout.Y_AXIS));
@@ -51,14 +52,20 @@ public class TelaPrincipal extends JFrame {
         gor.setBorder(new EmptyBorder(0, 5, 0, 0));
         gordura.add(gorduras);
         gordura.add(gor);
-        JPanel painelHistorioc = new JPanel();
-        painelHistorioc.setBorder(2,2);
+        JPanel painelHistorico = new JPanel();
+        painelHistorico.setLayout(new FlowLayout(FlowLayout.CENTER,0, 50));
+        painelHistorico.setPreferredSize(new Dimension(290, 500));
+        painelHistorico.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        // Criação do painel de histórico
+        ListaRef listaRefeicoes = new ListaRef();
         //Adicionando na Panel geral dos macros
         macros.add(proteina);
         macros.add(carboidratos);
         macros.add(gordura);
-        
         painelPrincipal.add(macros);
+        painelPrincipal.add(listaRefeicoes);
+        painelPrincipal.add(painelHistorico);
         add(painelPrincipal);
 
     }
