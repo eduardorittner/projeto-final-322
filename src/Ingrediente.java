@@ -36,5 +36,7 @@ public class Ingrediente extends Alimento implements Cloneable {
         Macros novo = Macros.macrosPorPorcao(this.getMacros(), super.getPorcao());
         return novo;
     }
+
+    
 }
 

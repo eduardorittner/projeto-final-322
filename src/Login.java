@@ -17,7 +17,6 @@ public class Login {
         try {
             BufferedWriter escritor = new BufferedWriter(new FileWriter(this.arquivo, true));
             if (!usuarioExiste(usuario)) {
-                escritor.append("\n");
                 escritor.append(usuario + "," + senha + "\n");
                 escritor.close();
             }
