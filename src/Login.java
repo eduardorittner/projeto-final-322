@@ -15,9 +15,17 @@ public class Login {
 
     public boolean cadastrarUsuario(String usuario, String senha) {
         try {
-            BufferedWriter escritor = new BufferedWriter(new FileWriter(this.arquivo));
-            escritor.append(usuario + "," + senha + "\n");
-            escritor.close();
+            BufferedWriter escritor = new BufferedWriter(new FileWriter(this.arquivo, true));
+            if (!usuarioExiste(usuario)) {
+                escritor.append(usuario + "," + senha + "\n");
+                escritor.close();
+            }
+            else {
+                escritor.close();
+                throw new IOException("Usuário ja existente!");
+            }
+            Usuario usuarioObjeto = new Usuario(usuario, usuario, ".", ".", ".", ".", ".");
+            usuarioObjeto.salvaUsuarios();
         } catch (IOException e) {
             return false;
         }

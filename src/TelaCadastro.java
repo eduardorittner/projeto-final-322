@@ -7,10 +7,8 @@ public class TelaCadastro extends JFrame {
     private JTextField campoLogin;
     private JPasswordField campoSenha;
     private JPasswordField campoSenhaConfirm;
-    private Login login;
 
     public TelaCadastro(Login login, TelaLogin telaLogin){
-        this.login = login;
         setTitle("Tela de Cadastro");
         setSize(390, 844);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -44,7 +42,7 @@ public class TelaCadastro extends JFrame {
                 String usuario = campoLogin.getText();
                 String senha = new String(campoSenha.getPassword());
                 String senha2 = new String(campoSenhaConfirm.getPassword());
-                if ( senha.equals(senha2)) {
+                if (senha.equals(senha2)) {
                     if (login.cadastrarUsuario(usuario, senha2)){
                         JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro feito com sucesso!");
                     } else{
@@ -67,8 +65,8 @@ public class TelaCadastro extends JFrame {
         painelPrincipal.add(Box.createVerticalGlue());
         add(painelPrincipal);
     }
-    public void abrirPrincipal (){
-        TelaPrincipal principal = new TelaPrincipal();
+    public void abrirPrincipal (Usuario u){
+        TelaPrincipal principal = new TelaPrincipal(u);
         principal.setVisible(true);
     }
 

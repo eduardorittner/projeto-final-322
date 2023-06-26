@@ -6,186 +6,194 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 public class TelaUsuario extends JPanel {
-    private JLabel nameLabel, ageLabel, emailLabel, weightLabel, heightLabel, generoLabel;
-    private JTextField nameField, ageField, emailField, weightField, heightField, generoField;
-    private JButton editButton; 
-    private JTabbedPane tabbedPane;
-    private JLabel photoLabel;
-    private ImageIcon photoIcon;
+    private JLabel nomeLabel, idadeLabel, emailLabel, pesoLabel, alturaLabel, generoLabel, nomeField, 
+                    idadeField, emailField, pesoField, alturaField, generoField;
+    private JButton botaoEditar; 
+    private JTabbedPane abas;
+    private JLabel fotoLabel;
+    private ImageIcon fotoIcon;
+    private Usuario usuario;
 
-    public TelaUsuario() {
-        //setTitle("Página do Usuário");
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setSize(400, 400);
-        //setLocationRelativeTo(null);
+    public TelaUsuario(Usuario u) {
+        this.usuario = u;
         setLayout(new BorderLayout());
 
-        tabbedPane = new JTabbedPane();
+        abas = new JTabbedPane();
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
+        JPanel painelPrincipal = new JPanel();
+        painelPrincipal.setLayout(new BorderLayout());
         
-        photoLabel = new JLabel();
-        photoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        photoLabel.setVerticalAlignment(SwingConstants.CENTER);
-        mainPanel.add(photoLabel, BorderLayout.NORTH);
+        fotoLabel = new JLabel();
+        fotoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        fotoLabel.setVerticalAlignment(SwingConstants.CENTER);
+        painelPrincipal.add(fotoLabel, BorderLayout.NORTH);
         
-        JPanel formPanel = new JPanel();
-        formPanel.setLayout(new GridLayout(6, 2));
+        JPanel painelFormatacao = new JPanel();
+        painelFormatacao.setLayout(new GridLayout(6, 2));
 
-        nameLabel = new JLabel("Nome:");
-        //nameField = new JTextField();
-        ageLabel = new JLabel("Idade:");
-        //ageField = new JTextField();
+        nomeLabel = new JLabel("Nome:");
+        nomeField = new JLabel(usuario.getNome());
+        idadeLabel = new JLabel("Idade:");
+        idadeField = new JLabel(usuario.getIdade());
         generoLabel = new JLabel("Gênero:");
-        //generoField = new JTextField();
-        weightLabel = new JLabel("Peso (Kg):");
-        //weightField = new JTextField();
-        heightLabel = new JLabel("Altura (cm):");
-        //heightField = new JTextField();
+        generoField = new JLabel(usuario.getGenero());
+        pesoLabel = new JLabel("Peso (Kg):");
+        pesoField = new JLabel(usuario.getPeso());
+        alturaLabel = new JLabel("Altura (cm):");
+        alturaField = new JLabel(usuario.getAltura());
         emailLabel = new JLabel("Email:");
-        //emailField = new JTextField();
+        emailField = new JLabel(usuario.getEmail());
 
-        formPanel.add(nameLabel);
-        //formPanel.add(nameField);
-        formPanel.add(ageLabel);
-        //formPanel.add(ageField);
-        formPanel.add(generoLabel);
-        //formPanel.add(generoField);
-        formPanel.add(emailLabel);
-        //formPanel.add(emailField);
-        formPanel.add(weightLabel);
-        //formPanel.add(weightField);
-        formPanel.add(heightLabel);
-        //formPanel.add(heightField);
+        painelFormatacao.add(nomeLabel);
+        painelFormatacao.add(nomeField);
+        painelFormatacao.add(idadeLabel);
+        painelFormatacao.add(idadeField);
+        painelFormatacao.add(generoLabel);
+        painelFormatacao.add(generoField);
+        painelFormatacao.add(emailLabel);
+        painelFormatacao.add(emailField);
+        painelFormatacao.add(pesoLabel);
+        painelFormatacao.add(pesoField);
+        painelFormatacao.add(alturaLabel);
+        painelFormatacao.add(alturaField);
 
-        mainPanel.add(formPanel, BorderLayout.CENTER);
+        painelPrincipal.add(painelFormatacao, BorderLayout.CENTER);
 
-        tabbedPane.addTab("Informações do Usuário", mainPanel);
-        add(tabbedPane, BorderLayout.CENTER);
+        abas.addTab("Informações do Usuário", painelPrincipal);
+        add(abas, BorderLayout.CENTER);
 
-        editButton = new JButton("Editar");
-        editButton.addActionListener(new ActionListener() {
+        botaoEditar = new JButton("Editar");
+        botaoEditar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JPanel editPanel = new JPanel();
-                editPanel.setLayout(new BorderLayout());
+                JPanel painelEditar = new JPanel();
+                painelEditar.setLayout(new BorderLayout());
 
-                JLabel editPhotoLabel = new JLabel();
-                editPhotoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                editPhotoLabel.setVerticalAlignment(SwingConstants.CENTER);
-                editPanel.add(editPhotoLabel, BorderLayout.NORTH);
+                JLabel editFotoLabel = new JLabel();
+                editFotoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                editFotoLabel.setVerticalAlignment(SwingConstants.CENTER);
+                painelEditar.add(editFotoLabel, BorderLayout.NORTH);
 
-                JLabel editNameLabel = new JLabel("Nome:");
-                JTextField editNameField = new JTextField();
-                JLabel editAgeLabel = new JLabel("Idade:");
-                JTextField editAgeField = new JTextField();
+                JLabel editNomeLabel = new JLabel("Nome:");
+                JTextField editNomeField = new JTextField();
+                JLabel editIdadeLabel = new JLabel("Idade:");
+                JTextField editIdadeField = new JTextField();
                 JLabel editGeneroLabel = new JLabel("Gênero:");
                 JTextField editGeneroField = new JTextField();
-                JLabel editWeightLabel = new JLabel("Peso (Kg):");
-                JTextField editWeightField = new JTextField();
-                JLabel editHeightLabel = new JLabel("Altura (cm):");
-                JTextField editHeightField = new JTextField();
+                JLabel editPesoLabel = new JLabel("Peso (Kg):");
+                JTextField editPesoField = new JTextField();
+                JLabel editAlturaLabel = new JLabel("Altura (cm):");
+                JTextField editAlturaField = new JTextField();
                 JLabel editEmailLabel = new JLabel("Email:");
                 JTextField editEmailField = new JTextField();
 
-                JPanel editFieldsPanel = new JPanel();
-                editFieldsPanel.setLayout(new GridLayout(6, 2));
-                editFieldsPanel.add(editNameLabel);
-                editFieldsPanel.add(editNameField);
-                editFieldsPanel.add(editAgeLabel);
-                editFieldsPanel.add(editAgeField);
-                editFieldsPanel.add(editGeneroLabel);
-                editFieldsPanel.add(editGeneroField);
-                editFieldsPanel.add(editWeightLabel);
-                editFieldsPanel.add(editWeightField);
-                editFieldsPanel.add(editHeightLabel);
-                editFieldsPanel.add(editHeightField);
-                editFieldsPanel.add(editEmailLabel);
-                editFieldsPanel.add(editEmailField);
+                JPanel painelEditarAtributos = new JPanel();
+                painelEditarAtributos.setLayout(new GridLayout(6, 2));
+                painelEditarAtributos.add(editNomeLabel);
+                painelEditarAtributos.add(editNomeField);
+                painelEditarAtributos.add(editIdadeLabel);
+                painelEditarAtributos.add(editIdadeField);
+                painelEditarAtributos.add(editGeneroLabel);
+                painelEditarAtributos.add(editGeneroField);
+                painelEditarAtributos.add(editPesoLabel);
+                painelEditarAtributos.add(editPesoField);
+                painelEditarAtributos.add(editAlturaLabel);
+                painelEditarAtributos.add(editAlturaField);
+                painelEditarAtributos.add(editEmailLabel);
+                painelEditarAtributos.add(editEmailField);
 
-                editPanel.add(editFieldsPanel, BorderLayout.CENTER);
+                painelEditar.add(painelEditarAtributos, BorderLayout.CENTER);
 
-                JButton cancelButton = new JButton("Cancelar");
-                cancelButton.addActionListener(new ActionListener () {
+                JButton botaoCancelar = new JButton("Cancelar");
+                botaoCancelar.addActionListener(new ActionListener () {
                     public void actionPerformed(ActionEvent e) {
-                        tabbedPane.remove(editPanel);
+                        abas.remove(painelEditar);
                     }
                 });
 
-                JButton photoButton = new JButton("Selecione uma foto");
+                JButton botaoFoto = new JButton("Selecione uma foto");
                 JFileChooser fileChooser = new JFileChooser();
-                photoButton.addActionListener(new ActionListener() {
+                botaoFoto.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "jpeg", "png", "gif");
                         fileChooser.setFileFilter(filter);
 
                         int result = fileChooser.showOpenDialog(null);
                         if (result == JFileChooser.APPROVE_OPTION) {
-                            File selectedPhoto = fileChooser.getSelectedFile();
-                            ImageIcon imageIcon = new ImageIcon(selectedPhoto.getPath());
-                            editPhotoLabel.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
+                            File fotoSelecionada = fileChooser.getSelectedFile();
+                            ImageIcon iconeImagem = new ImageIcon(fotoSelecionada.getPath());
+                            editFotoLabel.setIcon(new ImageIcon(iconeImagem.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
                         }
                     }
                 });
 
-                JButton saveButton = new JButton("Salvar");
-                saveButton.addActionListener(new ActionListener () {
+                JButton botaoSalvar = new JButton("Salvar");
+                botaoSalvar.addActionListener(new ActionListener () {
                     public void actionPerformed(ActionEvent e) {
-                        String editedName = editNameField.getText();
-                        String editedAge = editAgeField.getText();
-                        String editedEmail = editEmailField.getText();
-                        String editedWeight = editWeightField.getText();
-                        String editedHeight = editHeightField.getText();
-                        String editedGenero = editGeneroField.getText();
-                        // if (editedName.isEmpty()) {
-                        //     editedName = nameField.getText();
-                        // }
-                        // if (editedAge.isEmpty()) {
-                        //     editedAge = ageField.getText();
-                        // }
-                        // if (editedEmail.isEmpty()) {
-                        //     editedEmail = emailField.getText();
-                        // }
-                        // if (editedWeight.isEmpty()) {
-                        //     editedWeight = weightField.getText();
-                        // }
-                        // if (editedHeight.isEmpty()) {
-                        //     editedHeight = heightField.getText();
-                        // }
-                        // if (editedGenero.isEmpty()) {
-                        //  editedGenero = generoField.getText();   
-                        // }
+                        String nomeEditado = editNomeField.getText();
+                        String idadeEditado = editIdadeField.getText();
+                        String emailEditado = editEmailField.getText();
+                        String pesoEditado = editPesoField.getText();
+                        String alturaEditado = editAlturaField.getText();
+                        String generoEditado = editGeneroField.getText();
+                        if (nomeEditado.isEmpty()) {
+                            nomeEditado = nomeField.getText();
+                        }
+                        if (idadeEditado.isEmpty()) {
+                            idadeEditado = idadeField.getText();
+                        }
+                        if (emailEditado.isEmpty()) {
+                            emailEditado = emailField.getText();
+                        }
+                        if (pesoEditado.isEmpty()) {
+                            pesoEditado = pesoField.getText();
+                        }
+                        if (alturaEditado.isEmpty()) {
+                            alturaEditado = alturaField.getText();
+                        }
+                        if (generoEditado.isEmpty()) {
+                         generoEditado = generoField.getText();   
+                        }
                         
-                        // nameField.setText(editedName);
-                        // ageField.setText(editedAge);
-                        // emailField.setText(editedEmail);
-                        // weightField.setText(editedWeight);
-                        // heightField.setText(editedHeight);
-                        // generoField.setText(editedGenero);
+                        nomeField.setText(nomeEditado);
+                        idadeField.setText(idadeEditado);
+                        emailField.setText(emailEditado);
+                        pesoField.setText(pesoEditado);
+                        alturaField.setText(alturaEditado);
+                        generoField.setText(generoEditado);
 
-                        File editedPhotoFile = fileChooser.getSelectedFile();
-                        if (editedPhotoFile != null) {
-                            photoIcon = new ImageIcon(editedPhotoFile.getPath());
-                            photoLabel.setIcon(new ImageIcon(photoIcon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
+                        usuario.setNome(nomeEditado);
+                        usuario.setIdade(idadeEditado);
+                        usuario.setAltura(alturaEditado);
+                        usuario.setPeso(pesoEditado);
+                        usuario.setGenero(generoEditado);
+                        usuario.setEmail(emailEditado);
+
+                        File fotoEditadaFile = fileChooser.getSelectedFile();
+                        if (fotoEditadaFile != null) {
+                            fotoIcon = new ImageIcon(fotoEditadaFile.getPath());
+                            fotoLabel.setIcon(new ImageIcon(fotoIcon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
+                            usuario.setCaminhoFoto(fotoEditadaFile.getPath());
                         }
 
-                        tabbedPane.remove(editPanel);
+                        usuario.salvaUsuarios();
+
+                        abas.remove(painelEditar);
                     }
                 });
 
-                JPanel editButtonsPanel = new JPanel();
-                editButtonsPanel.add(cancelButton);
-                editButtonsPanel.add(saveButton);
-                editButtonsPanel.add(photoButton);
+                JPanel painelBotoesEditar = new JPanel();
+                painelBotoesEditar.add(botaoCancelar);
+                painelBotoesEditar.add(botaoSalvar);
+                painelBotoesEditar.add(botaoFoto);
 
-                editPanel.add(editButtonsPanel, BorderLayout.SOUTH);
+                painelEditar.add(painelBotoesEditar, BorderLayout.SOUTH);
 
-                tabbedPane.addTab("", editPanel);
-                tabbedPane.setSelectedComponent(editPanel);
+                abas.addTab("", painelEditar);
+                abas.setSelectedComponent(painelEditar);
             }
         });
 
-        add(editButton, BorderLayout.SOUTH);
+        add(botaoEditar, BorderLayout.SOUTH);
         setVisible(true);
     }
 }

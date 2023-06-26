@@ -8,7 +8,8 @@ import javax.swing.border.*;
 import javax.swing.border.EmptyBorder;
 
 public class TelaPrincipal extends JFrame {
-    public TelaPrincipal(){
+    public TelaPrincipal(Usuario u){
+        System.out.println("================================================");
         setTitle("Tela Principal");
         setSize(390, 844);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -17,7 +18,7 @@ public class TelaPrincipal extends JFrame {
         JPanel painelPrincipal = new JPanel();
         CardLayout cardLayout = new CardLayout();
         painelPrincipal.setLayout(cardLayout);
-        TelaUsuario telaUsuario = new TelaUsuario();
+        TelaUsuario telaUsuario = new TelaUsuario(u);
         TelaHistorico telaHistorico = new TelaHistorico();
         painelPrincipal.add(telaUsuario, "Tela Usuario");
         painelPrincipal.add(telaHistorico, "Tela Historico");
