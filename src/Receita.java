@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 public class Receita extends Alimento {
 
     private ArrayList<Ingrediente> listaIngredientes;
@@ -28,10 +27,15 @@ public class Receita extends Alimento {
 
     @Override
     public String toString() {
-        return super.toString() + listaAlimentos();
+        String resultado = super.toString();
+        for (Ingrediente ingrediente : listaIngredientes) {
+            resultado += "," + (ingrediente.toString());
+        }
+        return resultado;
     }
 
-    // Métodos 
+    // Métodos
+
 
     public static Receita novaReceita(String nome) {
         Receita novo = new Receita(nome, 0.0, 0.0, 0.0, 0.0, 1.0);
@@ -45,24 +49,34 @@ public class Receita extends Alimento {
         double peso = 0;
         super.setMacros(Macros.macrosPorPorcao(super.getMacros(), 0)); // Zera a contagem atual
 
-        for (Ingrediente i:listaIngredientes) {
+        for (Ingrediente i : listaIngredientes) {
+
             peso += i.getPorcao();
             aux = Macros.macrosPorPorcao(i.getMacros(), i.getPorcao());
             novo = Macros.somaMacros(aux, novo);
         }
-        this.setMacros(novo);       // Atualiza os macros e o peso da receita
+        this.setMacros(novo); // Atualiza os macros e o peso da receita
+
         super.setPorcao(peso);
         return true;
     }
 
     public boolean adicionarIngrediente(Ingrediente ingrediente, double peso) throws CloneNotSupportedException {
-        Ingrediente novo = ingrediente.clone(); // crio uma cópia do ingrediente para mudar sua porção 
-        novo.setPorcao(peso);                   // de acordo com a receita                 
+        Ingrediente novo = ingrediente.clone(); // crio uma cópia do ingrediente para mudar sua porção
+        novo.setPorcao(peso); // de acordo com a receita
         listaIngredientes.add(novo);
-        calcularMacros();                       // Atualiza os macros dessa Receita
+        calcularMacros(); // Atualiza os macros dessa Receita
         return true;
     }
 
+    public boolean adicionarIngrediente(Ingrediente ingrediente) throws CloneNotSupportedException {
+        // Essa função só é chamada quando o ingrediente é importado do csv, já que ele
+        // vem com o peso correto.
+        Ingrediente novo = ingrediente.clone(); // crio uma cópia do ingrediente para mudar sua porção
+        listaIngredientes.add(ingrediente);
+        calcularMacros(); // Atualiza os macros dessa Receita
+        return true;
+    }
 
     // Métodos auxiliares
 
@@ -73,7 +87,8 @@ public class Receita extends Alimento {
     public void imprimirAlimentos() {
         System.out.println("Ingredientes da receita " + super.getNome());
         int i = 0;
-        for (Ingrediente en:listaIngredientes) {
+        for (Ingrediente en : listaIngredientes) {
+
             System.out.println(i + ") " + en.getNome() + "(" + en.getPorcao() + "g)");
             i++;
         }
@@ -82,7 +97,8 @@ public class Receita extends Alimento {
     public String listaAlimentos() {
         String string = "";
         int i = 1;
-        for (Ingrediente en:listaIngredientes) {
+        for (Ingrediente en : listaIngredientes) {
+
             string += i + ") " + en.getNome() + " (" + en.getPorcao() + "g)\n";
             i++;
         }
@@ -90,3 +106,4 @@ public class Receita extends Alimento {
     }
 
 }
+
