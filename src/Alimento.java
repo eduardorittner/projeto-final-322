@@ -3,6 +3,7 @@ import java.util.*;
 public abstract class Alimento implements Cloneable {
 
     private final int id; // id final para que possamos referenciar o alimento em uma lista
+
     private String nome;
     private Macros macros;
     private double porcao;
@@ -29,11 +30,13 @@ public abstract class Alimento implements Cloneable {
         fat = fat / porcao;
         carb = carb / porcao;
         cal = cal / porcao;
+
         this.porcao = porcao;
         this.nome = nome; // TODO validação do nome (somente letras)
         this.macros = new Macros(prot, fat, carb, cal);
 
         int temp = rand.nextInt(1000000); // Gerador de id único por alimento
+
         while (listaIds.contains(temp)) {
             temp = rand.nextInt(1000000);
         }
@@ -75,6 +78,7 @@ public abstract class Alimento implements Cloneable {
         // NAO MUDAR
         return nome + "," + macros.getProt() + "," + macros.getFat() + "," + macros.getCarb() + ","
                 + macros.getCal() + "," + porcao;
+
     }
 
     @Override
@@ -84,8 +88,10 @@ public abstract class Alimento implements Cloneable {
 
     // Métodos
 
+
     public boolean calcularMacros() {
         return true;
     }
 
 }
+

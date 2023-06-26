@@ -36,6 +36,7 @@ public class Receita extends Alimento {
 
     // Métodos
 
+
     public static Receita novaReceita(String nome) {
         Receita novo = new Receita(nome, 0.0, 0.0, 0.0, 0.0, 1.0);
         return novo;
@@ -49,11 +50,13 @@ public class Receita extends Alimento {
         super.setMacros(Macros.macrosPorPorcao(super.getMacros(), 0)); // Zera a contagem atual
 
         for (Ingrediente i : listaIngredientes) {
+
             peso += i.getPorcao();
             aux = Macros.macrosPorPorcao(i.getMacros(), i.getPorcao());
             novo = Macros.somaMacros(aux, novo);
         }
         this.setMacros(novo); // Atualiza os macros e o peso da receita
+
         super.setPorcao(peso);
         return true;
     }
@@ -85,6 +88,7 @@ public class Receita extends Alimento {
         System.out.println("Ingredientes da receita " + super.getNome());
         int i = 0;
         for (Ingrediente en : listaIngredientes) {
+
             System.out.println(i + ") " + en.getNome() + "(" + en.getPorcao() + "g)");
             i++;
         }
@@ -94,6 +98,7 @@ public class Receita extends Alimento {
         String string = "";
         int i = 1;
         for (Ingrediente en : listaIngredientes) {
+
             string += i + ") " + en.getNome() + " (" + en.getPorcao() + "g)\n";
             i++;
         }
@@ -101,3 +106,4 @@ public class Receita extends Alimento {
     }
 
 }
+

@@ -10,6 +10,7 @@ public class Ingrediente extends Alimento implements Cloneable {
     // A princípio não vai alterar os macros, esses continuam sendo referentes a 1g
     // do alimento
 
+
     // Constructor
 
     public Ingrediente(String nome, double prot, double fat, double carb, double cal, double porcao) {
@@ -23,6 +24,7 @@ public class Ingrediente extends Alimento implements Cloneable {
 
     // Métodos
 
+
     @Override
     public boolean calcularMacros() {
         Macros novo = Macros.macrosPorPorcao(this.getMacros(), super.getPorcao());
@@ -35,3 +37,4 @@ public class Ingrediente extends Alimento implements Cloneable {
         return novo;
     }
 }
+
