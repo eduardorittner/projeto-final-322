@@ -76,8 +76,8 @@ public abstract class Alimento implements Cloneable {
     @Override
     public String toString() {
         // NAO MUDAR
-        return nome + "," + macros.getProt() + "," + macros.getFat() + "," + macros.getCarb() + ","
-                + macros.getCal() + "," + porcao;
+        return "Nome do ingrediente: " + nome + ", Proteínas: " + (macros.getProt()) + ", Gordura: " + macros.getFat() + ", Carboidratos: " + macros.getCarb() + ", Calorias: "
+                + macros.getCal() + ", Peso: " + porcao;
 
     }
 

@@ -38,4 +38,18 @@ public class PainelCircular extends JPanel {
 
         g.drawString(data, textX, textY);
     }
+
+    /**
+     * @return the data
+     */
+    public String getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(String data) {
+        this.data = data;
+    }
 }

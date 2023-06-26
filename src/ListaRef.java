@@ -1,3 +1,4 @@
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.*;
@@ -8,7 +9,7 @@ import javax.swing.*;
 public class ListaRef extends JPanel {
     private DefaultListModel<Ingrediente> modelo;
     private JList<Ingrediente> lista;
-    public ListaRef() {
+    public ListaRef(TelaHistorico historico) {
         modelo = new DefaultListModel<>();
         lista = new JList<>(modelo);
         setLayout(new BoxLayout(ListaRef.this, BoxLayout.Y_AXIS));
@@ -57,6 +58,10 @@ public class ListaRef extends JPanel {
                         Ingrediente alimento = new Ingrediente(nome1, prots1, gords1, carbs1,cal1, peso1);
                         modelo.addElement(alimento);
                         input.dispose();
+                        historico.setProt(ListaRef.this.getProtTotais());
+                        historico.setCarb(ListaRef.this.getCarbsTotais());
+                        historico.setGor(ListaRef.this.getGordTotais());
+                        historico.repaint()
                     }
                 });
                 painelPrincipal.add(ok);
@@ -68,7 +73,36 @@ public class ListaRef extends JPanel {
         remove.addActionListener((ActionListener) new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // removeRefeicao();
+                JFrame input = new JFrame();
+                input.setSize(300, 300);
+                JPanel painelPrincipal = new JPanel();
+                painelPrincipal.setLayout(new BoxLayout(painelPrincipal, BoxLayout.Y_AXIS));
+                JLabel nome = new JLabel("Insira o nome do ingrediente a ser removido: ");
+                JTextField nomeInput = new JTextField(20);
+                JButton ok = new JButton("OK");
+                ok.addActionListener(new ActionListener() {
+                    boolean entrou = false;
+                    public void actionPerformed(ActionEvent e) {
+                        for (int i = 0; i < modelo.size(); i++){
+                            if (modelo.get(i).getNome().equals(nomeInput.getText())){
+                                modelo.removeElement(modelo.get(i));
+                                entrou = true;
+                                input.dispose();
+                                historico.setProt(ListaRef.this.getProtTotais());
+                                historico.setCarb(ListaRef.this.getCarbsTotais());
+                                historico.setGor(ListaRef.this.getGordTotais());
+                            }
+                        }
+                        if (!entrou){
+                            JOptionPane.showMessageDialog(ListaRef.this, "Ingrediente não encontrado!");
+                        }
+                    }
+                });
+                painelPrincipal.add(nome);
+                painelPrincipal.add(nomeInput);
+                painelPrincipal.add(ok);
+                input.add(painelPrincipal);
+                input.setVisible(true);
             }
         });
         add(new JScrollPane(lista), BorderLayout.CENTER);
@@ -79,10 +113,25 @@ public class ListaRef extends JPanel {
         add(botoes);
     }
 
-    public void setLista (DefaultListModel<Ingrediente> modelo){
-        this.modelo = modelo;
+    public String getProtTotais(){
+        double total = 0.00;
+        for (int i = 0; i < modelo.size(); i++){
+            total += modelo.get(i).getMacros().getProt();
+        }
+        return String.format("%.2f", total);
     }
-    public DefaultListModel<Ingrediente> getListaModel() {
-        return this.modelo;
+    public String getGordTotais(){
+        double total = 0.00;
+        for (int i = 0; i < modelo.size(); i++){
+            total += modelo.get(i).getMacros().getFat();
+        }
+        return String.format("%.2f", total);
+    }
+    public String getCarbsTotais(){
+        double total = 0.00;
+        for (int i = 0; i < modelo.size(); i++){
+            total += modelo.get(i).getMacros().getCarb();
+        }
+        return String.format("%.2f", total);
     }
 }
