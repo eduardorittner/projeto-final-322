@@ -1,14 +1,14 @@
 //import java.util.*;
 
+public class Ingrediente extends Alimento implements Cloneable {
 
-public class Ingrediente extends Alimento {
-
-    // a porção será usada na receita e na refeição
-
+    public double porcao;
     // Seria o tamanho de uma porção "normal" em gramas
-    // Até onde pensei o constructor vai ser o mesmo, assim como as variáveis de class
+    // Até onde pensei o constructor vai ser o mesmo, assim como as variáveis de
+    // class
     // Deixei a variável porção para alterar quando colocar dentro de uma receita.
-    // A princípio não vai alterar os macros, esses continuam sendo referentes a 1g do alimento
+    // A princípio não vai alterar os macros, esses continuam sendo referentes a 1g
+    // do alimento
 
     // Constructor
 
@@ -21,7 +21,7 @@ public class Ingrediente extends Alimento {
         return (Ingrediente) super.clone();
     }
 
-    // Métodos 
+    // Métodos
 
     @Override
     public boolean calcularMacros() {
@@ -30,9 +30,8 @@ public class Ingrediente extends Alimento {
         return true;
     }
 
-    
     public Macros CalcularMacrosPorcao() {
         Macros novo = Macros.macrosPorPorcao(this.getMacros(), super.getPorcao());
         return novo;
-    }   
+    }
 }
