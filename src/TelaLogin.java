@@ -6,14 +6,8 @@ import java.awt.event.ActionListener;
 public class TelaLogin extends JFrame {
     private JTextField campoLogin;
     private JPasswordField campoSenha;
-    private Login login;
 
-    public TelaLogin() {
-        try {
-            this.login = new Login("contas");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+    public TelaLogin(Login login) {
         setTitle("Tela de Login");
         setSize(390, 844);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -46,8 +40,9 @@ public class TelaLogin extends JFrame {
                     JOptionPane.showMessageDialog(TelaLogin.this, "Credenciais inválidas!");
                 } else {
                     JOptionPane.showMessageDialog(TelaLogin.this, "Login bem-sucedido!");
+                    Usuario u = Usuario.procuraUsuario(usuario);
                     dispose();
-                    abrirPrincipal();
+                    abrirPrincipal(u);
                 }
             }
         });
@@ -72,8 +67,8 @@ public class TelaLogin extends JFrame {
         add(painelPrincipal);
     }
 
-    public void abrirPrincipal() {
-        TelaPrincipal principal = new TelaPrincipal();
+    public void abrirPrincipal(Usuario u) {
+        TelaPrincipal principal = new TelaPrincipal(u);
         principal.setVisible(true);
     }
     public void abrirCadastro (Login login, TelaLogin telaLogin) {

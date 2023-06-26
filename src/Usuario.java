@@ -1,19 +1,20 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Usuario {
+public class Usuario implements Serializable {
     private String username;
     private String nome;
-    private int idade;
-    private double altura;
-    private double peso;
+    private String idade;
+    private String altura;
+    private String peso;
     private String genero;
     private String email;
-    private static ArrayList<Usuario> listaUsuarios;
+    private static ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
     private ArrayList<Refeicao> listaRefeicoes;
     private String caminhoFoto;
     
     //Construtor
-    public Usuario(String username, String nome, int idade, double altura, double peso, String genero, String email) {
+    public Usuario(String username, String nome, String idade, String altura, String peso, String genero, String email) {
         this.username = username;
         this.nome = nome;
         this.idade = idade;
@@ -21,24 +22,32 @@ public class Usuario {
         this.peso = peso;
         this.genero = genero;
         this.email = email;
-        listaUsuarios = new ArrayList<Usuario>();
-        listaRefeicoes = new ArrayList<Refeicao>();
+        this.listaRefeicoes = new ArrayList<Refeicao>();
         this.caminhoFoto = "";
     }
 
     //Métodos
-    public boolean adicionaUsuario(Usuario usuario) {
-        try {
-        listaUsuarios.add(usuario);
-        return true;
-        } catch (Exception e) {
-            return false;
+    // public static void bancoUsuarios() {
+    //     FileOutputStream f = new FileOutputStream("usuarios.tmp");
+    //     ObjectOutputStram o = new ObjectOutputStream(f);
+    // }
+
+    public static Usuario procuraUsuario(String username) {
+        for (Usuario u : listaUsuarios) {
+            if (u.getUsername().equals(username))
+                return u;
         }
+        return null;
     }
 
-    public boolean removeUsuario(Usuario usuario) {
+    public static boolean adicionaUsuario(Usuario usuario) {
+        return listaUsuarios.add(usuario);
+    }
+
+    public static boolean removeUsuario(String username) {
         try {
-        listaUsuarios.remove(usuario);
+        Usuario u = procuraUsuario(username);
+        listaUsuarios.remove(u);
         return true;
         } catch (Exception e) {
             return false;
@@ -58,24 +67,24 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public int getIdade() {
+    public String getIdade() {
         return idade;
     }
-    public void setIdade(int idade) {
+    public void setIdade(String idade) {
         this.idade = idade;
     }
 
-    public double getAltura() {
+    public String getAltura() {
         return altura;
     }
-    public void setAltura(double altura) {
+    public void setAltura(String altura) {
         this.altura = altura;
     }
 
-    public double getPeso() {
+    public String getPeso() {
         return peso;
     }
-    public void setPeso(double peso) {
+    public void setPeso(String peso) {
         this.peso = peso;
     }
 
