@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class TelaLogin extends JFrame {
     private JTextField campoLogin;
@@ -40,9 +44,25 @@ public class TelaLogin extends JFrame {
                     JOptionPane.showMessageDialog(TelaLogin.this, "Credenciais inválidas!");
                 } else {
                     JOptionPane.showMessageDialog(TelaLogin.this, "Login bem-sucedido!");
-                    Usuario u = Usuario.procuraUsuario(usuario);
                     dispose();
-                    abrirPrincipal(u);
+                    try {
+                        BufferedReader leitor = new BufferedReader(new FileReader(usuario + ".csv"));
+                        boolean b = leitor.ready();
+                        while (b) {
+                            System.out.println((char) leitor.read());
+                            b = leitor.ready();
+                        }
+                        String linhaw = leitor.readLine();
+                        String[] linha = linhaw.split(",");
+                        if (leitor.readLine().split(",")[0].equals(usuario)) {
+                            Usuario u = new Usuario(linha[0], linha[1], linha[2], linha[3], linha[4], linha[5], linha[6]);
+                            u.setCaminhoFoto(linha[7]);
+                            abrirPrincipal(u);
+                            leitor.close();
+                        }
+                        leitor.close();
+                    } catch (IOException ex) {
+                    }
                 }
             }
         });

@@ -12,8 +12,10 @@ public class TelaUsuario extends JPanel {
     private JTabbedPane abas;
     private JLabel fotoLabel;
     private ImageIcon fotoIcon;
+    private Usuario usuario;
 
-    public TelaUsuario(Usuario usuario) {
+    public TelaUsuario(Usuario u) {
+        this.usuario = u;
         setLayout(new BorderLayout());
 
         abas = new JTabbedPane();
@@ -172,6 +174,8 @@ public class TelaUsuario extends JPanel {
                             fotoLabel.setIcon(new ImageIcon(fotoIcon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
                             usuario.setCaminhoFoto(fotoEditadaFile.getPath());
                         }
+
+                        usuario.salvaUsuarios();
 
                         abas.remove(painelEditar);
                     }

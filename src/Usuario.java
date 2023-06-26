@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -9,12 +13,17 @@ public class Usuario implements Serializable {
     private String peso;
     private String genero;
     private String email;
-    private static ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
+    //private static ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
     private ArrayList<Refeicao> listaRefeicoes;
     private String caminhoFoto;
+    private File bancoUsuario;
     
     //Construtor
     public Usuario(String username, String nome, String idade, String altura, String peso, String genero, String email) {
+        try {
+            this.bancoUsuario = new File(username + ".csv");
+        } catch (Exception e) {
+        }
         this.username = username;
         this.nome = nome;
         this.idade = idade;
@@ -23,36 +32,47 @@ public class Usuario implements Serializable {
         this.genero = genero;
         this.email = email;
         this.listaRefeicoes = new ArrayList<Refeicao>();
-        this.caminhoFoto = "";
+        this.caminhoFoto = ".";
     }
 
     //Métodos
-    // public static void bancoUsuarios() {
-    //     FileOutputStream f = new FileOutputStream("usuarios.tmp");
-    //     ObjectOutputStram o = new ObjectOutputStream(f);
+    public void salvaUsuarios() {
+        try {
+        BufferedWriter escritor = new BufferedWriter(new FileWriter(this.bancoUsuario));
+        escritor.append(username + "," + nome + "," + idade + "," + altura + "," + peso + "," + genero + "," + email + "," + caminhoFoto + "\n");
+        escritor.close();
+        } catch (IOException e) {
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario [username=" + username + ", nome=" + nome + ", idade=" + idade + ", altura=" + altura
+                + ", peso=" + peso + ", genero=" + genero + ", email=" + email + ", listaRefeicoes=" + listaRefeicoes
+                + ", caminhoFoto=" + caminhoFoto + "]";
+    }
+
+    // public static Usuario procuraUsuario(String username) {
+    //     for (Usuario u : listaUsuarios) {
+    //         if (u.getUsername().equals(username))
+    //             return u;
+    //     }
+    //     return null;
     // }
 
-    public static Usuario procuraUsuario(String username) {
-        for (Usuario u : listaUsuarios) {
-            if (u.getUsername().equals(username))
-                return u;
-        }
-        return null;
-    }
+    // public static boolean adicionaUsuario(Usuario usuario) {
+    //     return listaUsuarios.add(usuario);
+    // }
 
-    public static boolean adicionaUsuario(Usuario usuario) {
-        return listaUsuarios.add(usuario);
-    }
-
-    public static boolean removeUsuario(String username) {
-        try {
-        Usuario u = procuraUsuario(username);
-        listaUsuarios.remove(u);
-        return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+    // public static boolean removeUsuario(String username) {
+    //     try {
+    //     Usuario u = procuraUsuario(username);
+    //     listaUsuarios.remove(u);
+    //     return true;
+    //     } catch (Exception e) {
+    //         return false;
+    //     }
+    // }
     
     public void listaRefeicoes() {
         for (Refeicao r : listaRefeicoes) {
@@ -102,9 +122,9 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public static ArrayList<Usuario> getListaUsuarios() {
-        return listaUsuarios;
-    }
+    // public static ArrayList<Usuario> getListaUsuarios() {
+    //     return listaUsuarios;
+    // }
 
     public ArrayList<Refeicao> getListaRefeicoes() {
         return listaRefeicoes;
