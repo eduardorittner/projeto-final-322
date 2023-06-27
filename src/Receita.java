@@ -21,17 +21,8 @@ public class Receita extends Alimento {
         return listaIngredientes;
     }
 
-    public void setListaIngredientes(ArrayList<Ingrediente> listaIngredientes) {
+    public void setListaIngredientes(ArrayList<Ingrediente> ßßlistaIngredientes) {
         this.listaIngredientes = listaIngredientes;
-    }
-
-    @Override
-    public String toString() {
-        String resultado = super.toString();
-        for (Ingrediente ingrediente : listaIngredientes) {
-            resultado += "," + (ingrediente.toString());
-        }
-        return resultado;
     }
 
     // Métodos
