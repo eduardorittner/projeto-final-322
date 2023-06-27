@@ -5,17 +5,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-// TODO
-// Encontrar um jeito de fechar o escritor e leitor quando o objeto for destruído
-// Provavelmente com algum tipo de interface
-
-// TODO
-// Fazer com que quando ele importa uma receita,
-// importa os ingredientes não so como percentes à receita,
-// mas também como ingredientes que podem ser utilizados em outra receitas.
-// pra isso precisamos ter algum lugar pra armazenar todos os ingredientes
-// disponíveis, talvez uma lista estática da classe
-
 public class ExpoImpoAlimentos implements ExpoImpo, AutoCloseable {
 
     private File arquivo;
