@@ -18,7 +18,7 @@ public class TelaPrincipal extends JFrame {
         CardLayout cardLayout = new CardLayout();
         painelPrincipal.setLayout(cardLayout);
         TelaUsuario telaUsuario = new TelaUsuario(u);
-        TelaHistorico telaHistorico = new TelaHistorico();
+        TelaHistorico telaHistorico = new TelaHistorico(u);
         painelPrincipal.add(telaUsuario, "Tela Usuario");
         painelPrincipal.add(telaHistorico, "Tela Historico");
         // painelPrincipal.add(Box.createVerticalGlue());

@@ -45,6 +45,15 @@ public class Usuario implements Serializable {
         }
     }
 
+    public void salvarHistorico(Ingrediente ingrediente){
+        try {
+        BufferedWriter escritor = new BufferedWriter(new FileWriter(this.bancoUsuario, true));
+        escritor.append(ingrediente.toString());
+        escritor.close();
+        } catch (IOException e) {
+        }
+    }
+
     @Override
     public String toString() {
         return "Usuario [username=" + username + ", nome=" + nome + ", idade=" + idade + ", altura=" + altura
