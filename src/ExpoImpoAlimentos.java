@@ -5,16 +5,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-// TODO
-// Encontrar um jeito de fechar o escritor e leitor quando o objeto for destruído
-// Provavelmente com algum tipo de interface
-
-// TODO
-// Fazer com que quando ele importa uma receita,
-// importa os ingredientes não so como percentes à receita,
-// mas também como ingredientes que podem ser utilizados em outra receitas.
-// pra isso precisamos ter algum lugar pra armazenar todos os ingredientes
-// disponíveis, talvez uma lista estática da classe
 
 public class ExpoImpoAlimentos implements ExpoImpo, AutoCloseable {
 
@@ -170,16 +160,12 @@ public class ExpoImpoAlimentos implements ExpoImpo, AutoCloseable {
                     // Precisamos fazer assim pois a porção que é passada pro ingrediente também
                     // influencia nos macros
                     ingrediente = new Ingrediente(nome, prot, fat, carb, cal, 1.0);
-                    // TODO poderiamos armazenar esse ingrediente numa lista estática, por exemplo,
-                    // pra poder ser usado em novas receitas pelo usuário
                     receita.adicionarIngrediente(ingrediente, porcao);
                 }
                 listaReceitas.add(receita);
             }
 
         } catch (IOException e) {
-            // Como deu erro e não temos como saber o estado da lista de receitas, limpamos
-            // ela
             listaReceitas.clear();
             return false;
         } catch (CloneNotSupportedException e) {

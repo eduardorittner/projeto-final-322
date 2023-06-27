@@ -71,10 +71,6 @@ public class Receita extends Alimento {
 
     // Métodos auxiliares
 
-    public void encontrarAlimento() {
-        // TODO
-    }
-
     public void imprimirAlimentos() {
         System.out.println("Ingredientes da receita " + super.getNome());
         int i = 0;
