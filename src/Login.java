@@ -19,8 +19,7 @@ public class Login {
             if (!usuarioExiste(usuario)) {
                 escritor.append(usuario + "," + senha + "\n");
                 escritor.close();
-            }
-            else {
+            } else {
                 escritor.close();
                 throw new IOException("Usuário ja existente!");
             }

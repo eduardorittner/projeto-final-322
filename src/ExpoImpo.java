@@ -7,18 +7,7 @@ public interface ExpoImpo {
 
     public File getArquivo();
 
-    abstract public boolean exportarIngredientes(ArrayList<Ingrediente> listaIngredientes);
+    abstract public boolean exportar(ArrayList<?> listaObjetos);
 
-    abstract public boolean exportarReceitas(ArrayList<Receita> listaReceitas);
-
-    abstract public boolean exportarAlimentos(ArrayList<Alimento> listaAlimentos);
-
-    abstract public boolean importarIngredientes(ArrayList<Ingrediente> listaIngredientes);
-
-    abstract public boolean importarReceitas(ArrayList<Receita> listaReceitas);
-
-    abstract public boolean importarAlimentos(ArrayList<Alimento> listaAlimentos);
-
-    abstract boolean estaAtualizado();
-
+    abstract public boolean importar(ArrayList<?> listaObjetos);
 }
