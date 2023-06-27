@@ -88,4 +88,18 @@ public class Login {
         }
         return false;
     }
+
+    /**
+     * @return the arquivo
+     */
+    public File getArquivo() {
+        return arquivo;
+    }
+
+    /**
+     * @param arquivo the arquivo to set
+     */
+    public void setArquivo(File arquivo) {
+        this.arquivo = arquivo;
+    }
 }

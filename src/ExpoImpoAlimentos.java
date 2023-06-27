@@ -182,4 +182,39 @@ public class ExpoImpoAlimentos implements ExpoImpo, AutoCloseable {
         return true;
     }
 
+    /**
+     * @param arquivo the arquivo to set
+     */
+    public void setArquivo(File arquivo) {
+        this.arquivo = arquivo;
+    }
+
+    /**
+     * @return the escritor
+     */
+    public FileWriter getEscritor() {
+        return escritor;
+    }
+
+    /**
+     * @param escritor the escritor to set
+     */
+    public void setEscritor(FileWriter escritor) {
+        this.escritor = escritor;
+    }
+
+    /**
+     * @return the leitor
+     */
+    public BufferedReader getLeitor() {
+        return leitor;
+    }
+
+    /**
+     * @param leitor the leitor to set
+     */
+    public void setLeitor(BufferedReader leitor) {
+        this.leitor = leitor;
+    }
+
 }
