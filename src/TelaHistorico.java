@@ -11,8 +11,8 @@ public class TelaHistorico extends JPanel {
         private String carb = "0";
         private String gor = "0";
         private String cal = "0";
-        private DefaultListModel<Ingrediente> modelo;
-        private JList<Ingrediente> lista;
+        private DefaultListModel<Alimento> modelo;
+        private JList<Alimento> lista;
 
         public TelaHistorico(Usuario u) {
                 JPanel painelPrincipal = new JPanel();
@@ -100,7 +100,7 @@ public class TelaHistorico extends JPanel {
                 } catch (IOException e) {
                 }
                 setLayout(new BoxLayout(TelaHistorico.this, BoxLayout.Y_AXIS));
-                JButton add = new JButton("Add");
+                JButton add = new JButton("Adicionar");
                 add.addActionListener((ActionListener) new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -151,13 +151,10 @@ public class TelaHistorico extends JPanel {
                                                                 String nome1 = nomeInput.getText();
                                                                 double peso1 = Double.parseDouble(pesoInput.getText());
                                                                 double carbs1 = Double.parseDouble(carbInput.getText());
-                                                                double prots1 = Double
-                                                                                .parseDouble(protsInput.getText());
+                                                                double prots1 = Double.parseDouble(protsInput.getText());
                                                                 double gords1 = Double.parseDouble(gordInput.getText());
                                                                 double cal1 = Double.parseDouble(calInput.getText());
-                                                                Ingrediente alimento = new Ingrediente(nome1, prots1,
-                                                                                gords1, carbs1,
-                                                                                cal1, peso1);
+                                                                Ingrediente alimento = new Ingrediente(nome1, prots1, gords1, carbs1,cal1, peso1);
                                                                 modelo.addElement(alimento);
                                                                 input.dispose();
                                                                 alimento.calcularMacros();
@@ -187,100 +184,93 @@ public class TelaHistorico extends JPanel {
                                                 painelReceita.add(tituloPorcao);
                                                 painelReceita.add(porcaoInput);
                                                 painelReceita.add(ok);
-                                                ArrayList<Ingrediente> listaIngredientes = new ArrayList<>();
-
                                                 ok.addActionListener(new ActionListener() {
                                                         public void actionPerformed(ActionEvent e) {
                                                                 String nomeReceita = nomeReceitaInput.getText();
                                                                 double porcao = Double
                                                                                 .parseDouble(porcaoInput.getText());
-                                                                Receita receita = new Receita(nomeReceita, 0, 0, 0, 0,
-                                                                                porcao);
+                                                                Receita receita = new Receita(nomeReceita, 0, 0, 0, 0,porcao);
                                                                 novaReceita.dispose();
-                                                                        JFrame input = new JFrame();
-                                                                        input.setSize(390, 844);
-                                                                        JPanel painelPrincipal = new JPanel();
-                                                                        painelPrincipal.setLayout(
-                                                                                        new BoxLayout(painelPrincipal,
-                                                                                                        BoxLayout.Y_AXIS));
-                                                                        JLabel nome = new JLabel("Nome");
-                                                                        JTextField nomeInput = new JTextField(20);
-                                                                        JLabel peso = new JLabel("Peso");
-                                                                        JTextField pesoInput = new JTextField(20);
-                                                                        JLabel carbs = new JLabel("Carboidratos");
-                                                                        JTextField carbInput = new JTextField(20);
-                                                                        JLabel prots = new JLabel("Proteínas");
-                                                                        JTextField protsInput = new JTextField(20);
-                                                                        JLabel gord = new JLabel("Gorduras");
-                                                                        JTextField gordInput = new JTextField(20);
-                                                                        JLabel cal = new JLabel("Calorias");
-                                                                        JTextField calInput = new JTextField(20);
-                                                                        painelPrincipal.add(nome);
-                                                                        painelPrincipal.add(nomeInput);
-                                                                        painelPrincipal.add(peso);
-                                                                        painelPrincipal.add(pesoInput);
-                                                                        painelPrincipal.add(carbs);
-                                                                        painelPrincipal.add(carbInput);
-                                                                        painelPrincipal.add(prots);
-                                                                        painelPrincipal.add(protsInput);
-                                                                        painelPrincipal.add(gord);
-                                                                        painelPrincipal.add(gordInput);
-                                                                        painelPrincipal.add(cal);
-                                                                        painelPrincipal.add(calInput);
-                                                                        painelPrincipal.setVisible(true);
-                                                                        JButton ok = new JButton("OK");
-                                                                        ok.addActionListener(new ActionListener() {
-                                                                                public void actionPerformed(ActionEvent e) {
-                                                                                        String nome1 = nomeInput.getText();
-                                                                                        double peso1 = Double.parseDouble(pesoInput.getText());
-                                                                                        double carbs1 = Double.parseDouble(carbInput.getText());
-                                                                                        double prots1 = Double.parseDouble(protsInput.getText());
-                                                                                        double gords1 = Double.parseDouble(gordInput.getText());
-                                                                                        double cal1 = Double.parseDouble(calInput.getText());
-                                                                                        Ingrediente alimento = new Ingrediente(
-                                                                                                        nome1, prots1,
-                                                                                                        gords1, carbs1,
-                                                                                                        cal1, peso1);
-
-                                                                                        input.dispose();
-                                                                                        alimento.calcularMacros();
-                                                                                        atualizarDados(proteinas, carbo,
-                                                                                                        gorduras, calo);
-                                                                                        try {
-                                                                                                receita.adicionarIngrediente(alimento);
-                                                                                        } catch (Exception error) {
-                                                                                        }
-                                                                                
+                                                                JFrame input = new JFrame();
+                                                                input.setSize(390, 844);
+                                                                JPanel painelPrincipal = new JPanel();
+                                                                painelPrincipal.setLayout(new BoxLayout(painelPrincipal,BoxLayout.Y_AXIS));
+                                                                JLabel nome = new JLabel("Nome");
+                                                                JTextField nomeInput = new JTextField(20);
+                                                                JLabel peso = new JLabel("Peso");
+                                                                JTextField pesoInput = new JTextField(20);
+                                                                JLabel carbs = new JLabel("Carboidratos");
+                                                                JTextField carbInput = new JTextField(20);
+                                                                JLabel prots = new JLabel("Proteínas");
+                                                                JTextField protsInput = new JTextField(20);
+                                                                JLabel gord = new JLabel("Gorduras");
+                                                                JTextField gordInput = new JTextField(20);
+                                                                JLabel cal = new JLabel("Calorias");
+                                                                JTextField calInput = new JTextField(20);
+                                                                painelPrincipal.add(nome);
+                                                                painelPrincipal.add(nomeInput);
+                                                                painelPrincipal.add(peso);
+                                                                painelPrincipal.add(pesoInput);
+                                                                painelPrincipal.add(carbs);
+                                                                painelPrincipal.add(carbInput);
+                                                                painelPrincipal.add(prots);
+                                                                painelPrincipal.add(protsInput);
+                                                                painelPrincipal.add(gord);
+                                                                painelPrincipal.add(gordInput);
+                                                                painelPrincipal.add(cal);
+                                                                painelPrincipal.add(calInput);
+                                                                painelPrincipal.setVisible(true);
+                                                                JButton ok = new JButton("OK");
+                                                                ok.addActionListener(new ActionListener() {
+                                                                        public void actionPerformed(ActionEvent e) {
+                                                                                String nome1 = nomeInput.getText();
+                                                                                double peso1 = Double.parseDouble(pesoInput.getText());
+                                                                                double carbs1 = Double.parseDouble(carbInput.getText());
+                                                                                double prots1 = Double.parseDouble(protsInput.getText());
+                                                                                double gords1 = Double.parseDouble(gordInput.getText());
+                                                                                double cal1 = Double.parseDouble(calInput.getText());
+                                                                                Ingrediente alimento = new Ingrediente(
+                                                                                                nome1, prots1,
+                                                                                                gords1, carbs1,
+                                                                                                cal1, peso1);
+                                                                                alimento.calcularMacros();
+                                                                                atualizarDados(proteinas, carbo,
+                                                                                                gorduras, calo);
+                                                                                resetarInput(nomeInput, pesoInput, carbInput, protsInput, gordInput, calInput);
+                                                                                try {
+                                                                                        receita.adicionarIngrediente(alimento);
+                                                                                } catch (Exception error) {
                                                                                 }
-                                                                        });
+                                                                        
+                                                                        }
+                                                                });
 
-                                                                        JButton proximo = new JButton("Próximo");
+                                                                JButton finalizar = new JButton("Finalizar");
 
-                                                                        ok.addActionListener(new ActionListener() {
-                                                                                public void actionPerformed(ActionEvent e) {
-                                                                                        
-                                                                                }
-                                                                         });
-
-                                                                        painelPrincipal.add(ok);
-                                                                        input.add(painelPrincipal);
-                                                                        input.setVisible(true);
-                                                                
-
+                                                                finalizar.addActionListener(new ActionListener() {
+                                                                        public void actionPerformed(ActionEvent e) {
+                                                                                input.dispose();
+                                                                                modelo.addElement(receita);
+                                                                                receita.calcularMacros();
+                                                                                u.salvarHistorico(receita);
+                                                                }
+                                                                });
+                                                                painelPrincipal.add(ok);
+                                                                painelPrincipal.add(finalizar);
+                                                                input.add(painelPrincipal);
+                                                                input.setVisible(true);
                                                         }
                                                 });
                                                 novaReceita.add(painelReceita);
                                                 novaReceita.setVisible(true);
-
                                         }
                                 });
-
                                 escolha.add(painel);
                                 escolha.setVisible(true);
 
                         }
                 });
-                JButton remove = new JButton("Remove");
+                JButton remove = new JButton("Remover");
                 remove.addActionListener((ActionListener) new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -343,6 +333,12 @@ public class TelaHistorico extends JPanel {
                                 }
                         }
                 });
+                JButton exportar = new JButton("Exportar Dia");
+                exportar.addActionListener(new ActionListener() {
+                        public void actionPerformed(Action e) {
+                                
+                        }
+                });
                 JPanel botoes = new JPanel();
                 botoes.setLayout(new BoxLayout(botoes, BoxLayout.X_AXIS));
                 botoes.add(add);
@@ -397,28 +393,28 @@ public class TelaHistorico extends JPanel {
         /**
          * @return the modelo
          */
-        public DefaultListModel<Ingrediente> getModelo() {
+        public DefaultListModel<Alimento> getModelo() {
                 return modelo;
         }
 
         /**
          * @param modelo the modelo to set
          */
-        public void setModelo(DefaultListModel<Ingrediente> modelo) {
+        public void setModelo(DefaultListModel<Alimento> modelo) {
                 this.modelo = modelo;
         }
 
         /**
          * @return the lista
          */
-        public JList<Ingrediente> getLista() {
+        public JList<Alimento> getLista() {
                 return lista;
         }
 
         /**
          * @param lista the lista to set
          */
-        public void setLista(JList<Ingrediente> lista) {
+        public void setLista(JList<Alimento> lista) {
                 this.lista = lista;
         }
 
@@ -478,6 +474,15 @@ public class TelaHistorico extends JPanel {
                 carbo.repaint();
                 gorduras.repaint();
                 calo.repaint();
+        }
+
+        public void resetarInput(JTextField nome, JTextField peso,JTextField carbo,JTextField prot,JTextField gor,JTextField cal){
+                nome.setText("");
+                peso.setText("");
+                carbo.setText("");
+                prot.setText("");
+                gor.setText("");
+                cal.setText("");
         }
 
 }

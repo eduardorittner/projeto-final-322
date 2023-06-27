@@ -53,6 +53,14 @@ public class Usuario implements Serializable {
         } catch (IOException e) {
         }
     }
+    public void salvarHistorico(Receita receita){
+        try {
+        BufferedWriter escritor = new BufferedWriter(new FileWriter(this.bancoUsuario, true));
+        escritor.append(receita.toString());
+        escritor.close();
+        } catch (IOException e) {
+        }
+    }
 
     @Override
     public String toString() {
