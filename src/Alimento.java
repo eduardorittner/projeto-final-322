@@ -91,5 +91,33 @@ public abstract class Alimento implements Cloneable {
         return true;
     }
 
+    /**
+     * @return the listaIds
+     */
+    public static ArrayList<Integer> getListaIds() {
+        return listaIds;
+    }
+
+    /**
+     * @param listaIds the listaIds to set
+     */
+    public static void setListaIds(ArrayList<Integer> listaIds) {
+        Alimento.listaIds = listaIds;
+    }
+
+    /**
+     * @return the rand
+     */
+    public Random getRand() {
+        return rand;
+    }
+
+    /**
+     * @param rand the rand to set
+     */
+    public void setRand(Random rand) {
+        this.rand = rand;
+    }
+
 }
 

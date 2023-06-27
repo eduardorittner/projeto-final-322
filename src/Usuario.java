@@ -35,7 +35,7 @@ public class Usuario implements Serializable {
     public void salvaUsuarios() {
         try {
         BufferedWriter escritor = new BufferedWriter(new FileWriter(this.bancoUsuario));
-        escritor.append(username + "," + nome + "," + idade + "," + altura + "," + peso + "," + genero + "," + email + "," + caminhoFoto + "\n");
+        escritor.append(username + "," + nome + "," + idade + "," + altura + "," + peso + "," + genero + "," + email + "," + caminhoFoto);
         escritor.close();
         } catch (IOException e) {
         }
@@ -44,7 +44,7 @@ public class Usuario implements Serializable {
     public void salvarHistorico(Ingrediente ingrediente){
         try {
         BufferedWriter escritor = new BufferedWriter(new FileWriter(this.bancoUsuario, true));
-        escritor.append(ingrediente.toString());
+        escritor.write("\n" + ingrediente.toString());
         escritor.close();
         } catch (IOException e) {
         }
