@@ -13,8 +13,6 @@ public class Usuario implements Serializable {
     private String peso;
     private String genero;
     private String email;
-    //private static ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
-    private ArrayList<Refeicao> listaRefeicoes;
     private String caminhoFoto;
     private File bancoUsuario;
     
@@ -31,7 +29,6 @@ public class Usuario implements Serializable {
         this.peso = peso;
         this.genero = genero;
         this.email = email;
-        this.listaRefeicoes = new ArrayList<Refeicao>();
         this.caminhoFoto = ".";
     }
 
@@ -57,37 +54,9 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "Usuario [username=" + username + ", nome=" + nome + ", idade=" + idade + ", altura=" + altura
-                + ", peso=" + peso + ", genero=" + genero + ", email=" + email + ", listaRefeicoes=" + listaRefeicoes
-                + ", caminhoFoto=" + caminhoFoto + "]";
+                + ", peso=" + peso + ", genero=" + genero + ", email=" + email + ", caminhoFoto=" + caminhoFoto + "]";
     }
 
-    // public static Usuario procuraUsuario(String username) {
-    //     for (Usuario u : listaUsuarios) {
-    //         if (u.getUsername().equals(username))
-    //             return u;
-    //     }
-    //     return null;
-    // }
-
-    // public static boolean adicionaUsuario(Usuario usuario) {
-    //     return listaUsuarios.add(usuario);
-    // }
-
-    // public static boolean removeUsuario(String username) {
-    //     try {
-    //     Usuario u = procuraUsuario(username);
-    //     listaUsuarios.remove(u);
-    //     return true;
-    //     } catch (Exception e) {
-    //         return false;
-    //     }
-    // }
-    
-    public void listaRefeicoes() {
-        for (Refeicao r : listaRefeicoes) {
-            r.listaAlimentos();
-        }
-    }
     //Getters e setters
     public String getNome() {
         return nome;
@@ -129,14 +98,6 @@ public class Usuario implements Serializable {
     }
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    // public static ArrayList<Usuario> getListaUsuarios() {
-    //     return listaUsuarios;
-    // }
-
-    public ArrayList<Refeicao> getListaRefeicoes() {
-        return listaRefeicoes;
     }
 
     public String getUsername() {
