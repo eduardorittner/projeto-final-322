@@ -42,11 +42,14 @@ public class TelaCadastro extends JFrame {
                 String usuario = campoLogin.getText();
                 String senha = new String(campoSenha.getPassword());
                 String senha2 = new String(campoSenhaConfirm.getPassword());
-                if (senha.equals(senha2)) {
+                if (senha.equals("") || senha2.equals("") || usuario.equals("")){
+                    JOptionPane.showMessageDialog(TelaCadastro.this, "Erro ao cadastrar!");
+                } 
+                else if (senha.equals(senha2) ) {
                     if (login.cadastrarUsuario(usuario, senha2)){
                         JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro feito com sucesso!");
                     } else{
-                        JOptionPane.showMessageDialog(TelaCadastro.this, "Erro ao cadastrar");
+                        JOptionPane.showMessageDialog(TelaCadastro.this, "Erro ao cadastrar!");
                     }
                     dispose();
                     telaLogin.setVisible(true);
