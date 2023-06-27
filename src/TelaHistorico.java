@@ -107,6 +107,7 @@ public class TelaHistorico extends JPanel{
                         Ingrediente alimento = new Ingrediente(nome1, prots1, gords1, carbs1,cal1, peso1);
                         modelo.addElement(alimento);
                         input.dispose();
+                        alimento.calcularMacros();
                         proteinas.setData(TelaHistorico.this.getProtTotais());
                         carbo.setData(TelaHistorico.this.getCarbsTotais());
                         gorduras.setData(TelaHistorico.this.getGordTotais());
@@ -139,6 +140,7 @@ public class TelaHistorico extends JPanel{
                                 modelo.removeElement(modelo.get(i));
                                 entrou = true;
                                 input.dispose();
+                                modelo.get(i).calcularMacros();
                                 proteinas.setData(TelaHistorico.this.getProtTotais());
                                 carbo.setData(TelaHistorico.this.getCarbsTotais());
                                 gorduras.setData(TelaHistorico.this.getGordTotais());
