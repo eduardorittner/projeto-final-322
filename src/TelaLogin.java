@@ -13,8 +13,11 @@ import java.util.ArrayList;
 public class TelaLogin extends JFrame {
         private JTextField campoLogin;
         private JPasswordField campoSenha;
+        private Login login;
+        private Usuario usuario;
 
         public TelaLogin(Login login) {
+                this.login = login;
                 setTitle("Tela de Login");
                 setSize(390, 844);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -96,5 +99,61 @@ public class TelaLogin extends JFrame {
         public void abrirCadastro(Login login, TelaLogin telaLogin) {
                 TelaCadastro cadastro = new TelaCadastro(login, telaLogin);
                 cadastro.setVisible(true);
+        }
+
+        /**
+         * @return the campoLogin
+         */
+        public JTextField getCampoLogin() {
+                return campoLogin;
+        }
+
+        /**
+         * @param campoLogin the campoLogin to set
+         */
+        public void setCampoLogin(JTextField campoLogin) {
+                this.campoLogin = campoLogin;
+        }
+
+        /**
+         * @return the campoSenha
+         */
+        public JPasswordField getCampoSenha() {
+                return campoSenha;
+        }
+
+        /**
+         * @param campoSenha the campoSenha to set
+         */
+        public void setCampoSenha(JPasswordField campoSenha) {
+                this.campoSenha = campoSenha;
+        }
+
+        /**
+         * @return the login
+         */
+        public Login getLogin() {
+                return login;
+        }
+
+        /**
+         * @param login the login to set
+         */
+        public void setLogin(Login login) {
+                this.login = login;
+        }
+
+        /**
+         * @return the usuario
+         */
+        public Usuario getUsuario() {
+                return usuario;
+        }
+
+        /**
+         * @param usuario the usuario to set
+         */
+        public void setUsuario(Usuario usuario) {
+                this.usuario = usuario;
         }
 }

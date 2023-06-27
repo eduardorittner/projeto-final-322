@@ -92,5 +92,19 @@ public class Receita extends Alimento {
         return string;
     }
 
+    /**
+     * @return the aux
+     */
+    public ArrayList<Ingrediente> getAux() {
+        return aux;
+    }
+
+    /**
+     * @param aux the aux to set
+     */
+    public void setAux(ArrayList<Ingrediente> aux) {
+        this.aux = aux;
+    }
+
 }
 

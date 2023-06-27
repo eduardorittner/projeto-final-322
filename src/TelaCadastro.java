@@ -7,6 +7,8 @@ public class TelaCadastro extends JFrame {
     private JTextField campoLogin;
     private JPasswordField campoSenha;
     private JPasswordField campoSenhaConfirm;
+    private Login login;
+    private Usuario usuario;
 
     public TelaCadastro(Login login, TelaLogin telaLogin){
         setTitle("Tela de Cadastro");
@@ -71,6 +73,66 @@ public class TelaCadastro extends JFrame {
     public void abrirPrincipal (Usuario u){
         TelaPrincipal principal = new TelaPrincipal(u);
         principal.setVisible(true);
+    }
+    /**
+     * @return the campoLogin
+     */
+    public JTextField getCampoLogin() {
+        return campoLogin;
+    }
+    /**
+     * @param campoLogin the campoLogin to set
+     */
+    public void setCampoLogin(JTextField campoLogin) {
+        this.campoLogin = campoLogin;
+    }
+    /**
+     * @return the campoSenha
+     */
+    public JPasswordField getCampoSenha() {
+        return campoSenha;
+    }
+    /**
+     * @param campoSenha the campoSenha to set
+     */
+    public void setCampoSenha(JPasswordField campoSenha) {
+        this.campoSenha = campoSenha;
+    }
+    /**
+     * @return the campoSenhaConfirm
+     */
+    public JPasswordField getCampoSenhaConfirm() {
+        return campoSenhaConfirm;
+    }
+    /**
+     * @param campoSenhaConfirm the campoSenhaConfirm to set
+     */
+    public void setCampoSenhaConfirm(JPasswordField campoSenhaConfirm) {
+        this.campoSenhaConfirm = campoSenhaConfirm;
+    }
+    /**
+     * @return the login
+     */
+    public Login getLogin() {
+        return login;
+    }
+    /**
+     * @param login the login to set
+     */
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+    /**
+     * @return the usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

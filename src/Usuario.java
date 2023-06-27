@@ -140,4 +140,18 @@ public class Usuario implements Serializable {
     public String getCaminhoFoto() {
         return caminhoFoto;
     }
+
+    /**
+     * @return the bancoUsuario
+     */
+    public File getBancoUsuario() {
+        return bancoUsuario;
+    }
+
+    /**
+     * @param bancoUsuario the bancoUsuario to set
+     */
+    public void setBancoUsuario(File bancoUsuario) {
+        this.bancoUsuario = bancoUsuario;
+    }
 }

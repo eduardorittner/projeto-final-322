@@ -1,7 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -13,8 +15,10 @@ public class TelaHistorico extends JPanel {
         private String cal = "0";
         private DefaultListModel<Alimento> modelo;
         private JList<Alimento> lista;
+        private Usuario usuario;
 
         public TelaHistorico(Usuario u) {
+                this.usuario = u;
                 JPanel painelPrincipal = new JPanel();
                 painelPrincipal.setLayout(new BoxLayout(painelPrincipal, BoxLayout.Y_AXIS));
                 // Passar os macros como o formato de string (MUDAR COM .FORMAT OU .TOSTRING)
@@ -334,19 +338,27 @@ public class TelaHistorico extends JPanel {
                                 }
                         }
                 });
-                // JButton exportar = new JButton("Exportar Dia");
-                // exportar.addActionListener(new ActionListener() {
-                //         public void actionPerformed(Action e) {
-                //                 ExpoImpoDialog daia = new ExpoImpoDia();
-                //         }
-                // });
+                JButton exportar = new JButton("Exportar Dia");
+                exportar.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                                Calendar cal = Calendar.getInstance();
+                                SimpleDateFormat formatoData = new SimpleDateFormat("dd-MM-yyyy");
+                                String dataAtual = formatoData.format(cal.getTime());
+                                ExpoImpoDia exp = new ExpoImpoDia(dataAtual, u.getUsername());
+                                if (exp.exportar(null)){
+                                        JOptionPane.showMessageDialog(TelaHistorico.this, "Exportação do dia finalizado!");
+                                } else{
+                                        JOptionPane.showMessageDialog(TelaHistorico.this, "Falha ao exportar!");
+                                }
+                        }
+                });
                 JPanel botoes = new JPanel();
                 botoes.setLayout(new BoxLayout(botoes, BoxLayout.X_AXIS));
                 botoes.add(add);
                 botoes.add(remove);
                 botoes.add(resetar);
+                botoes.add(exportar);
                 add(botoes);
-
         }
 
         /**
@@ -484,6 +496,20 @@ public class TelaHistorico extends JPanel {
                 prot.setText("");
                 gor.setText("");
                 cal.setText("");
+        }
+
+        /**
+         * @return the usuario
+         */
+        public Usuario getUsuario() {
+                return usuario;
+        }
+
+        /**
+         * @param usuario the usuario to set
+         */
+        public void setUsuario(Usuario usuario) {
+                this.usuario = usuario;
         }
 
 }

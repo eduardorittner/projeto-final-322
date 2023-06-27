@@ -37,6 +37,20 @@ public class Ingrediente extends Alimento implements Cloneable {
         return novo;
     }
 
+    /**
+     * @return the porcao
+     */
+    public double getPorcao() {
+        return porcao;
+    }
+
+    /**
+     * @param porcao the porcao to set
+     */
+    public void setPorcao(double porcao) {
+        this.porcao = porcao;
+    }
+
     
 }
 
