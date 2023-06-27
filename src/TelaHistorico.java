@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -8,10 +10,11 @@ public class TelaHistorico extends JPanel{
     private String prot = "0";
     private String carb = "0";
     private String gor= "0";
+    private String cal= "0";
     private DefaultListModel<Ingrediente> modelo;
     private JList<Ingrediente> lista;
 
-    public TelaHistorico() {
+    public TelaHistorico(Usuario u) {
         JPanel painelPrincipal = new JPanel();
         painelPrincipal.setLayout(new BoxLayout(painelPrincipal, BoxLayout.Y_AXIS));
         //Passar os macros como o formato de string (MUDAR COM .FORMAT OU .TOSTRING)
@@ -19,6 +22,14 @@ public class TelaHistorico extends JPanel{
         JPanel macros = new JPanel();
         macros.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
         //Painel de proteinas
+        JPanel calorias = new JPanel();
+        calorias.setLayout(new BoxLayout(calorias, BoxLayout.Y_AXIS));
+        PainelCircular calo = new PainelCircular(cal);
+        JLabel c = new JLabel("Calorias");
+        c.setAlignmentX(Component.CENTER_ALIGNMENT);
+        calorias.add(calo);
+        calorias.add(c);
+        c.setBorder(new EmptyBorder(0, 5, 0, 0));
         JPanel proteina = new JPanel();
         proteina.setLayout(new BoxLayout(proteina, BoxLayout.Y_AXIS));
         //this.prot = getProtTotais();
@@ -56,11 +67,33 @@ public class TelaHistorico extends JPanel{
         macros.add(proteina);
         macros.add(carboidratos);
         macros.add(gordura);
+        macros.add(calorias);
         painelPrincipal.add(macros);
         //painelPrincipal.add(listaRefeicoes);
         add(painelPrincipal);
         modelo = new DefaultListModel<>();
         lista = new JList<>(modelo);
+        try {
+            BufferedReader leitor = new BufferedReader(new FileReader(u.getUsername()+ ".csv"));
+            String linha;
+            int contador = 0;
+            while (((linha = leitor.readLine()) != null)){
+                if (contador != 0){
+                    String[] var = linha.split(", ");
+                    ArrayList<String> dadosIn = new ArrayList<String>();
+                    for (int i = 0; i < var.length; i++){
+                        dadosIn.add(var[i].split(": ")[1]);
+                    }
+                    Ingrediente alimento = new Ingrediente(dadosIn.get(0), Double.parseDouble(dadosIn.get(1)),Double.parseDouble(dadosIn.get(2)), Double.parseDouble(dadosIn.get(3)),Double.parseDouble(dadosIn.get(4)), Double.parseDouble(dadosIn.get(5)));
+                    modelo.addElement(alimento);
+                    alimento.calcularMacros();
+                    atualizarDados(proteinas, carbo, gorduras, calo);
+                }
+                contador ++;
+            }
+            leitor.close();
+        } catch (IOException e) {
+        }
         setLayout(new BoxLayout(TelaHistorico.this, BoxLayout.Y_AXIS));
         JButton add = new JButton("Add");
         add.addActionListener((ActionListener) new ActionListener() {
@@ -108,12 +141,8 @@ public class TelaHistorico extends JPanel{
                         modelo.addElement(alimento);
                         input.dispose();
                         alimento.calcularMacros();
-                        proteinas.setData(TelaHistorico.this.getProtTotais());
-                        carbo.setData(TelaHistorico.this.getCarbsTotais());
-                        gorduras.setData(TelaHistorico.this.getGordTotais());
-                        proteinas.repaint();
-                        carbo.repaint();
-                        gorduras.repaint();
+                        atualizarDados(proteinas, carbo, gorduras, calo);
+                        u.salvarHistorico(alimento);
                     }
                 });
                 painelPrincipal.add(ok);
@@ -141,12 +170,7 @@ public class TelaHistorico extends JPanel{
                                 entrou = true;
                                 input.dispose();
                                 modelo.get(i).calcularMacros();
-                                proteinas.setData(TelaHistorico.this.getProtTotais());
-                                carbo.setData(TelaHistorico.this.getCarbsTotais());
-                                gorduras.setData(TelaHistorico.this.getGordTotais());
-                                proteinas.repaint();
-                                carbo.repaint();
-                                gorduras.repaint();
+                                atualizarDados(proteinas, carbo, gorduras, calo);
                                 }
                         }
                         if (!entrou){
@@ -162,10 +186,36 @@ public class TelaHistorico extends JPanel{
             }
         });
         add(new JScrollPane(lista), BorderLayout.CENTER);
+        JButton resetar = new JButton("Limpar Dia");
+        resetar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                modelo.removeAllElements();
+                atualizarDados(proteinas, carbo, gorduras, calo);
+                try {
+                    String nomeArquivo = u.getUsername()+ ".csv";
+                    File temp = new File (nomeArquivo);
+                    File tempFile = new File("temp.csv");
+                    BufferedWriter escritor = new BufferedWriter(new FileWriter(tempFile));
+                    BufferedReader leitor = new BufferedReader(new FileReader(nomeArquivo));
+                    int contador = 1;
+                    String linha;
+                    while (((linha = leitor.readLine()) != null) && contador != 0) {
+                        escritor.write(linha);
+                        contador ++;
+                    }
+                    escritor.close();
+                    leitor.close();
+                    temp.delete();
+                    tempFile.renameTo(temp);
+                } catch (IOException es) {
+                }
+            }
+        });
         JPanel botoes = new JPanel();
         botoes.setLayout(new BoxLayout(botoes, BoxLayout.X_AXIS));
         botoes.add(add);
         botoes.add(remove);
+        botoes.add(resetar);
         add(botoes);
 
     }
@@ -204,6 +254,54 @@ public class TelaHistorico extends JPanel{
 
 
     /**
+     * @return the cal
+     */
+    public String getCal() {
+        return cal;
+    }
+
+
+    /**
+     * @param cal the cal to set
+     */
+    public void setCal(String cal) {
+        this.cal = cal;
+    }
+
+
+    /**
+     * @return the modelo
+     */
+    public DefaultListModel<Ingrediente> getModelo() {
+        return modelo;
+    }
+
+
+    /**
+     * @param modelo the modelo to set
+     */
+    public void setModelo(DefaultListModel<Ingrediente> modelo) {
+        this.modelo = modelo;
+    }
+
+
+    /**
+     * @return the lista
+     */
+    public JList<Ingrediente> getLista() {
+        return lista;
+    }
+
+
+    /**
+     * @param lista the lista to set
+     */
+    public void setLista(JList<Ingrediente> lista) {
+        this.lista = lista;
+    }
+
+
+    /**
      * @return the gor
      */
     public String getGor() {
@@ -238,6 +336,24 @@ public class TelaHistorico extends JPanel{
             total += modelo.get(i).getMacros().getCarb();
         }
         return String.format("%.2f", total);
+    }
+    public String getCaloriasTotais(){
+        double total = 0.00;
+        for (int i = 0; i < modelo.size(); i++){
+            total += modelo.get(i).getMacros().getCal();
+        }
+        return String.format("%.2f", total);
+    }
+
+    public void atualizarDados(PainelCircular proteinas,PainelCircular carbo, PainelCircular gorduras, PainelCircular calo ){
+        proteinas.setData(TelaHistorico.this.getProtTotais());
+        carbo.setData(TelaHistorico.this.getCarbsTotais());
+        gorduras.setData(TelaHistorico.this.getGordTotais());
+        calo.setData(TelaHistorico.this.getCaloriasTotais());
+        proteinas.repaint();
+        carbo.repaint();
+        gorduras.repaint();
+        calo.repaint();
     }
     
 }
