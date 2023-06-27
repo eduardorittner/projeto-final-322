@@ -199,4 +199,242 @@ public class TelaUsuario extends JPanel {
         add(botaoEditar, BorderLayout.SOUTH);
         setVisible(true);
     }
+
+    /**
+     * @return the nomeLabel
+     */
+    public JLabel getNomeLabel() {
+        return nomeLabel;
+    }
+
+    /**
+     * @param nomeLabel the nomeLabel to set
+     */
+    public void setNomeLabel(JLabel nomeLabel) {
+        this.nomeLabel = nomeLabel;
+    }
+
+    /**
+     * @return the idadeLabel
+     */
+    public JLabel getIdadeLabel() {
+        return idadeLabel;
+    }
+
+    /**
+     * @param idadeLabel the idadeLabel to set
+     */
+    public void setIdadeLabel(JLabel idadeLabel) {
+        this.idadeLabel = idadeLabel;
+    }
+
+    /**
+     * @return the emailLabel
+     */
+    public JLabel getEmailLabel() {
+        return emailLabel;
+    }
+
+    /**
+     * @param emailLabel the emailLabel to set
+     */
+    public void setEmailLabel(JLabel emailLabel) {
+        this.emailLabel = emailLabel;
+    }
+
+    /**
+     * @return the pesoLabel
+     */
+    public JLabel getPesoLabel() {
+        return pesoLabel;
+    }
+
+    /**
+     * @param pesoLabel the pesoLabel to set
+     */
+    public void setPesoLabel(JLabel pesoLabel) {
+        this.pesoLabel = pesoLabel;
+    }
+
+    /**
+     * @return the alturaLabel
+     */
+    public JLabel getAlturaLabel() {
+        return alturaLabel;
+    }
+
+    /**
+     * @param alturaLabel the alturaLabel to set
+     */
+    public void setAlturaLabel(JLabel alturaLabel) {
+        this.alturaLabel = alturaLabel;
+    }
+
+    /**
+     * @return the generoLabel
+     */
+    public JLabel getGeneroLabel() {
+        return generoLabel;
+    }
+
+    /**
+     * @param generoLabel the generoLabel to set
+     */
+    public void setGeneroLabel(JLabel generoLabel) {
+        this.generoLabel = generoLabel;
+    }
+
+    /**
+     * @return the nomeField
+     */
+    public JLabel getNomeField() {
+        return nomeField;
+    }
+
+    /**
+     * @param nomeField the nomeField to set
+     */
+    public void setNomeField(JLabel nomeField) {
+        this.nomeField = nomeField;
+    }
+
+    /**
+     * @return the idadeField
+     */
+    public JLabel getIdadeField() {
+        return idadeField;
+    }
+
+    /**
+     * @param idadeField the idadeField to set
+     */
+    public void setIdadeField(JLabel idadeField) {
+        this.idadeField = idadeField;
+    }
+
+    /**
+     * @return the emailField
+     */
+    public JLabel getEmailField() {
+        return emailField;
+    }
+
+    /**
+     * @param emailField the emailField to set
+     */
+    public void setEmailField(JLabel emailField) {
+        this.emailField = emailField;
+    }
+
+    /**
+     * @return the pesoField
+     */
+    public JLabel getPesoField() {
+        return pesoField;
+    }
+
+    /**
+     * @param pesoField the pesoField to set
+     */
+    public void setPesoField(JLabel pesoField) {
+        this.pesoField = pesoField;
+    }
+
+    /**
+     * @return the alturaField
+     */
+    public JLabel getAlturaField() {
+        return alturaField;
+    }
+
+    /**
+     * @param alturaField the alturaField to set
+     */
+    public void setAlturaField(JLabel alturaField) {
+        this.alturaField = alturaField;
+    }
+
+    /**
+     * @return the generoField
+     */
+    public JLabel getGeneroField() {
+        return generoField;
+    }
+
+    /**
+     * @param generoField the generoField to set
+     */
+    public void setGeneroField(JLabel generoField) {
+        this.generoField = generoField;
+    }
+
+    /**
+     * @return the botaoEditar
+     */
+    public JButton getBotaoEditar() {
+        return botaoEditar;
+    }
+
+    /**
+     * @param botaoEditar the botaoEditar to set
+     */
+    public void setBotaoEditar(JButton botaoEditar) {
+        this.botaoEditar = botaoEditar;
+    }
+
+    /**
+     * @return the abas
+     */
+    public JTabbedPane getAbas() {
+        return abas;
+    }
+
+    /**
+     * @param abas the abas to set
+     */
+    public void setAbas(JTabbedPane abas) {
+        this.abas = abas;
+    }
+
+    /**
+     * @return the fotoLabel
+     */
+    public JLabel getFotoLabel() {
+        return fotoLabel;
+    }
+
+    /**
+     * @param fotoLabel the fotoLabel to set
+     */
+    public void setFotoLabel(JLabel fotoLabel) {
+        this.fotoLabel = fotoLabel;
+    }
+
+    /**
+     * @return the fotoIcon
+     */
+    public ImageIcon getFotoIcon() {
+        return fotoIcon;
+    }
+
+    /**
+     * @param fotoIcon the fotoIcon to set
+     */
+    public void setFotoIcon(ImageIcon fotoIcon) {
+        this.fotoIcon = fotoIcon;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

@@ -3,7 +3,10 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class TelaPrincipal extends JFrame {
+    private Usuario usuario;
+
     public TelaPrincipal(Usuario u){
+        this.usuario = u;
         setTitle("Tela Principal");
         setSize(390, 844);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -40,5 +43,19 @@ public class TelaPrincipal extends JFrame {
         pack();
         setLocationRelativeTo(null);
 
+    }
+
+    /**
+     * @return the usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

@@ -6,8 +6,8 @@ public class ExpoImpoDia implements ExpoImpo {
     private File arquivoEntrada;
 
     public ExpoImpoDia(String dia, String nomeUsuario) {
-        this.arquivo = new File(nomeUsuario + dia + ".csv");
-        this.arquivoEntrada = new File(nomeUsuario + ".csv");
+        this.arquivo = new File("dias/" + nomeUsuario + dia + ".csv");
+        this.arquivoEntrada = new File("dados/" +nomeUsuario + ".csv");
     }
 
     public boolean setArquivo(String novoArquivo) {
@@ -31,7 +31,7 @@ public class ExpoImpoDia implements ExpoImpo {
     public boolean exportar(ArrayList<?> listaObjetos) {
         try {
             BufferedReader leitor = new BufferedReader(new FileReader(arquivoEntrada));
-            BufferedWriter escritor = new BufferedWriter(new FileWriter(arquivo));
+            BufferedWriter escritor = new BufferedWriter(new FileWriter(arquivo, true));
             String linha = leitor.readLine();
             while ((linha = leitor.readLine()) != null) {
                 escritor.write(linha);
@@ -39,8 +39,30 @@ public class ExpoImpoDia implements ExpoImpo {
             leitor.close();
             escritor.close();
         } catch (Exception e) {
+            System.out.println(e);
             return false;
         }
-        return false;
+        return true;
+    }
+
+    /**
+     * @param arquivo the arquivo to set
+     */
+    public void setArquivo(File arquivo) {
+        this.arquivo = arquivo;
+    }
+
+    /**
+     * @return the arquivoEntrada
+     */
+    public File getArquivoEntrada() {
+        return arquivoEntrada;
+    }
+
+    /**
+     * @param arquivoEntrada the arquivoEntrada to set
+     */
+    public void setArquivoEntrada(File arquivoEntrada) {
+        this.arquivoEntrada = arquivoEntrada;
     }
 }
