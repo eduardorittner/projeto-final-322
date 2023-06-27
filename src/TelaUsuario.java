@@ -178,7 +178,7 @@ public class TelaUsuario extends JPanel {
                         if (fotoEditadaFile != null) {
                             fotoIcon = new ImageIcon(fotoEditadaFile.getPath());
                             fotoLabel.setIcon(new ImageIcon(fotoIcon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
-                            usuario.setCaminhoFoto(fotoEditadaFile.getPath());
+                            usuario.setCaminhoFoto(fotoEditadaFile.getPath()+ "\n");
                         }
 
                         usuario.salvaUsuarios();

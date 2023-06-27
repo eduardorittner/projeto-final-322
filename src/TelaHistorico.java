@@ -193,20 +193,20 @@ public class TelaHistorico extends JPanel{
                 atualizarDados(proteinas, carbo, gorduras, calo);
                 try {
                     String nomeArquivo = u.getUsername()+ ".csv";
-                    File temp = new File (nomeArquivo);
+                    File atual = new File(nomeArquivo);
                     File tempFile = new File("temp.csv");
-                    BufferedWriter escritor = new BufferedWriter(new FileWriter(tempFile));
+                    BufferedWriter escritor = new BufferedWriter(new FileWriter("temp.csv"));
                     BufferedReader leitor = new BufferedReader(new FileReader(nomeArquivo));
                     int contador = 1;
                     String linha;
                     while (((linha = leitor.readLine()) != null) && contador != 0) {
                         escritor.write(linha);
-                        contador ++;
+                        contador --;
                     }
                     escritor.close();
                     leitor.close();
-                    temp.delete();
-                    tempFile.renameTo(temp);
+                    atual.delete();
+                    tempFile.renameTo(atual);
                 } catch (IOException es) {
                 }
             }
