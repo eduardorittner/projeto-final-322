@@ -74,7 +74,7 @@ public class TelaHistorico extends JPanel {
                 modelo = new DefaultListModel<>();
                 lista = new JList<>(modelo);
                 try {
-                        BufferedReader leitor = new BufferedReader(new FileReader(u.getUsername() + ".csv"));
+                        BufferedReader leitor = new BufferedReader(new FileReader("dados/" + u.getUsername() + ".csv"));
                         String linha;
                         int contador = 0;
                         while (((linha = leitor.readLine()) != null)) {
@@ -283,17 +283,18 @@ public class TelaHistorico extends JPanel {
                                 JButton ok = new JButton("OK");
                                 ok.addActionListener(new ActionListener() {
                                         boolean entrou = false;
-
                                         public void actionPerformed(ActionEvent e) {
+                                                int indice = -1;
                                                 for (int i = 0; i < modelo.size(); i++) {
                                                         if (modelo.get(i).getNome().equals(nomeInput.getText())) {
-                                                                modelo.removeElement(modelo.get(i));
-                                                                entrou = true;
-                                                                input.dispose();
-                                                                modelo.get(i).calcularMacros();
-                                                                atualizarDados(proteinas, carbo, gorduras, calo);
+                                                                indice = i;
                                                         }
                                                 }
+                                                u.removeHistorico(modelo.get(indice));
+                                                modelo.removeElement(modelo.get(indice));
+                                                entrou = true;
+                                                input.dispose();
+                                                atualizarDados(proteinas, carbo, gorduras, calo);
                                                 if (!entrou) {
                                                         JOptionPane.showMessageDialog(TelaHistorico.this,
                                                                         "Ingrediente não encontrado!");
@@ -314,7 +315,7 @@ public class TelaHistorico extends JPanel {
                                 modelo.removeAllElements();
                                 atualizarDados(proteinas, carbo, gorduras, calo);
                                 try {
-                                        String nomeArquivo = u.getUsername() + ".csv";
+                                        String nomeArquivo = "dados/" + u.getUsername() + ".csv";
                                         File atual = new File(nomeArquivo);
                                         File tempFile = new File("temp.csv");
                                         BufferedWriter escritor = new BufferedWriter(new FileWriter("temp.csv"));
@@ -333,12 +334,12 @@ public class TelaHistorico extends JPanel {
                                 }
                         }
                 });
-                JButton exportar = new JButton("Exportar Dia");
-                exportar.addActionListener(new ActionListener() {
-                        public void actionPerformed(Action e) {
-                                
-                        }
-                });
+                // JButton exportar = new JButton("Exportar Dia");
+                // exportar.addActionListener(new ActionListener() {
+                //         public void actionPerformed(Action e) {
+                //                 ExpoImpoDialog daia = new ExpoImpoDia();
+                //         }
+                // });
                 JPanel botoes = new JPanel();
                 botoes.setLayout(new BoxLayout(botoes, BoxLayout.X_AXIS));
                 botoes.add(add);

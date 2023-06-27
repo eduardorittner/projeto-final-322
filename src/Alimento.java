@@ -31,7 +31,7 @@ public abstract class Alimento implements Cloneable {
         cal = cal / porcao;
 
         this.porcao = porcao;
-        this.nome = nome; // TODO validação do nome (somente letras)
+        this.nome = nome;
         this.macros = new Macros(prot, fat, carb, cal);
 
         int temp = rand.nextInt(1000000); // Gerador de id único por alimento
@@ -74,7 +74,6 @@ public abstract class Alimento implements Cloneable {
 
     @Override
     public String toString() {
-        // NAO MUDAR
         return "Nome: " + nome + ", Proteínas: " + (macros.getProt()) + ", Gordura: " + macros.getFat() + ", Carboidratos: " + macros.getCarb() + ", Calorias: "
                 + macros.getCal() + ", Peso: " + porcao + "\n";
 

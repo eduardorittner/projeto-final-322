@@ -159,16 +159,12 @@ public class ExpoImpoAlimentos implements ExpoImpo, AutoCloseable {
                     // Precisamos fazer assim pois a porção que é passada pro ingrediente também
                     // influencia nos macros
                     ingrediente = new Ingrediente(nome, prot, fat, carb, cal, 1.0);
-                    // TODO poderiamos armazenar esse ingrediente numa lista estática, por exemplo,
-                    // pra poder ser usado em novas receitas pelo usuário
                     receita.adicionarIngrediente(ingrediente, porcao);
                 }
                 listaReceitas.add(receita);
             }
 
         } catch (IOException e) {
-            // Como deu erro e não temos como saber o estado da lista de receitas, limpamos
-            // ela
             listaReceitas.clear();
             return false;
         } catch (CloneNotSupportedException e) {
