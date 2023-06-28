@@ -41,7 +41,6 @@ public class Receita extends Alimento {
         super.setMacros(Macros.macrosPorPorcao(super.getMacros(), 0)); // Zera a contagem atual
 
         for (Ingrediente i : listaIngredientes) {
-
             peso += i.getPorcao();
             aux = Macros.macrosPorPorcao(i.getMacros(), i.getPorcao());
             novo = Macros.somaMacros(aux, novo);

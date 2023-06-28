@@ -15,6 +15,7 @@ public class Ingrediente extends Alimento implements Cloneable {
 
     public Ingrediente(String nome, double prot, double fat, double carb, double cal, double porcao) {
         super(nome, prot, fat, carb, cal, porcao);
+        this.porcao = porcao;
     }
 
     @Override
